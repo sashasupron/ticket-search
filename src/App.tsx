@@ -1,38 +1,19 @@
-import { Client } from 'figma-js'; 
-import image from './assets/background1.png';
-import './App.css'
-
-
-const client = Client({
-  personalAccessToken: 'figd_mXj_LUE9P4L2oh1ptGmxkB8-iukihLTchcCP-QUI'
-});
-
-
-client.file('G84li0MrDPWRZGW5lVLIr1').then(file => {
-  console.log(file);
-}).catch(error => {
-  console.error(error);
-});
-
-
-
+import React from 'react';
+import { Input } from '@mui/material';
+import MainPage from './main-page/main_page';
+import Inputs from './main-page/inputs/inputs';
+import './App.css';
+import { MuiTypography } from './components/MuiTypography';
 
 
 
 function App() {
   return (
-    <div className="fullscreen">
-      <img src = {image} className = "full-img" />
-        <div className = "mainSearch">
-          <input type = "text" placeholder = "Where from?" />
-          <input type = "text" placeholder = "Where to?" />
-        </div>
-      </div>
-
-
-
-
-  )
+    <div className = 'App'>
+      {/* <MainPage /> */}
+      <MuiTypography />
+    </div>
+  );
 }
 
 export default App;
