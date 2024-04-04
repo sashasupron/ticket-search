@@ -12,9 +12,13 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
-    "@mui/material": "^5.15.14",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@fontsource/roboto": "^5.0.12",
+    "@mui/icons-material": "latest",
+    "@mui/material": "latest",
+    "@mui/x-date-pickers": "latest",
+    "dayjs": "^1.11.10",
+    "react": "latest",
+    "react-dom": "latest"
   },
   "devDependencies": {
     "@types/react": "^18.2.64",

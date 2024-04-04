@@ -1,20 +1,19 @@
 import React from 'react';
 import './main_page.css';
-import image from './assets/background1.png';
-import './inputs/inputs.css';
-import BasicTextFields from './box.tsx';
+import image from './assets/background2.png';
+import BoxMain from './box/box.tsx';
+import Description from './text/text';
+import { Box } from '@mui/material'; 
 
 
 function MainPage() {
   return (
-    <div className = "fullscreen">
-      {/* <img src = {image} className = "full-img" /> */}
-      {/* <input type = "text" placeholder = "Where from?" />
-      <input type = "text" placeholder = "Where to?" /> */}
+    <div className="fullscreen">
+      <img src={image} className="full-img" />
+      <BoxMain />
+      <Description />
     </div>
   );
 }
-
-
 
 export default MainPage;
