@@ -1,22 +1,15 @@
-import React from 'react';
-import MainPage from './main-page/main_page';
-import './App.css';
-import NavBar from './navigation/navigation';
-import Tekst from './main-page/temp';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-const theme = createTheme({
-  typography: {
-      fontFamily: 'Roboto, sans-serif',
-  },
-});
+import { ThemeProvider } from "@mui/material/styles";
+import "./App.css";
+import MainPage from "./main-page/main_page";
+import Tekst from "./main-page/temp";
+import NavBar from "./navigation/navigation";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-        <NavBar />
-        <MainPage />
-        <Tekst />
+      <NavBar />
+      <MainPage />
+      <Tekst />
     </ThemeProvider>
   );
 }
