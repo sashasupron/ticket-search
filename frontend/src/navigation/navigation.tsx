@@ -27,20 +27,20 @@ export default function NavBar() {
         <AppBar 
             position = "fixed" 
             className = {isScrolled ? 'scrolled' : 'transparent'} 
-            sx = {{ bgcolor: isScrolled ? '#69451e' : 'transparent',
+            sx = {{ bgcolor: isScrolled ? 'rgba(128, 75, 31, 0.8)' : 'transparent',
                 height : 80,
                 paddingTop : 1.5,
                 paddingLeft : 3,
             }} 
             elevation = {isScrolled ? 4 : 0}>
 
-<Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                     <SvgIcon component="span">
                         <img src={airplaneIcon} alt="Airplane Icon" style={{ width: '120%', height: 'auto' }} />
                     </SvgIcon>
                     <Typography variant="h5" component="div" sx={{ fontFamily: 'Roboto', marginLeft: 2 }}>
-                        SkySky
+                        TBSky
                     </Typography>
                 </Box>
 

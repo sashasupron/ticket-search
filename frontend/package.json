@@ -15,14 +15,12 @@
     "@fontsource/roboto": "^5.0.12",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
-    "@mui/x-date-pickers": "latest",
-    "axios": "^1.6.8",
+    "@mui/x-date-pickers": "^7.1.1",
     "dayjs": "^1.11.10",
     "react": "latest",
     "react-dom": "latest"
   },
   "devDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.14.0",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
@@ -30,6 +28,8 @@
     "@vitejs/plugin-react-swc": "^3.5.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.5"
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.8"
   }
 }
