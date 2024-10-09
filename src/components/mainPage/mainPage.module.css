@@ -4,9 +4,11 @@
     position: relative;
     overflow: hidden;
     display: flex;
-    justify-content: center; /* Центрируем содержимое по горизонтали */
-    align-items: flex-end; /* Выравниваем содержимое внизу */
+    justify-content: center; 
+    align-items: flex-end; 
   }
+
+  
   
   .full-img {
     width: 100%;
@@ -16,11 +18,11 @@
     top: 0;
     left: 0;
     z-index: -1;
-    background-color: rgba(0, 0, 0, 0.5); /* Черный цвет с 50% прозрачностью */
+    background-color: rgba(0, 0, 0, 0.5); 
   }
   
   .text-container {
-    text-align: center; /* Центрируем текст по горизонтали */
-    color: #fff; /* Цвет текста */
-    padding: 20px; /* Отступы для текста */
+    text-align: center; 
+    color: #fff;
+    padding: 20px; 
   }
