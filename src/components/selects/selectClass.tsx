@@ -5,7 +5,8 @@ import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState } from "react";
 
-export default function PassengersClass() {
+
+export default function selectClass() {
   const [classType, setClassType] = useState("");
 
   const handleClassChange = (event: SelectChangeEvent) => {
@@ -17,10 +18,9 @@ export default function PassengersClass() {
       <FormControl
         variant="filled"
         sx={{
-          minWidth: 170,
+          minWidth: 195,
           background: "white",
           borderRadius: 1,
-          marginTop: 1,
         }}
       >
         <InputLabel id="demo-simple-select-filled-label"> Class </InputLabel>

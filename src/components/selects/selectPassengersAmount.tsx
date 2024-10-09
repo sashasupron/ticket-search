@@ -17,10 +17,10 @@ export default function PassengersAmount() {
       <FormControl
         variant="filled"
         sx={{
-          minWidth: 170,
+          minWidth: 140,
           background: "white",
           borderRadius: 1,
-          marginRight: -8,
+          marginTop: 1,
         }}
       >
         <InputLabel id="demo-simple-select-filled-label">

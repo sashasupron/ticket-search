@@ -1,8 +1,15 @@
 "use client";
 import Button from "@mui/material/Button";
-import TestClient from "../../../response/test.js";
+import TestClient from "../response/test.js";
+import clsx from "clsx";
+import styles from './buttons.module.css';
 
-export default function SearchButton() {
+interface ButtonsProps {
+  label: string;
+  className?: string;
+}
+
+export default function Buttons({ label, className }: ButtonsProps) {
   return (
     <Button
       onClick={() => {
@@ -10,13 +17,14 @@ export default function SearchButton() {
           alert(res.data);
         });
       }}
+
       variant="outlined"
+
+      className={clsx(styles.customButton, className)}
+
       sx={{
         background: "rgba(250, 149, 44, 0.5)",
         borderRadius: 1,
-        marginTop: 1,
-        minWidth: 170, // Минимальная ширина кнопки
-        minHeight: 56, //
         color: "white",
         textTransform: "capitalize",
         borderColor: "rgba(250, 149, 44, 0)",
@@ -27,7 +35,7 @@ export default function SearchButton() {
         },
       }}
     >
-      Search
+     {label}
     </Button>
   );
 }

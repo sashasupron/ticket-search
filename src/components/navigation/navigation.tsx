@@ -5,22 +5,22 @@ import airplaneIcon from "./airplane-travelling-around-earth-svgrepo-com.svg";
 import "./navigation.css";
 
 export default function NavBar() {
-  const [isScrolled, setIsScrolled] = useState(false); // Состояние для отслеживания прокрутки
+  const [isScrolled, setIsScrolled] = useState(false); 
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY; // Получаем текущую позицию прокрутки
+      const scrollPosition = window.scrollY;
       if (scrollPosition > 0) {
-        setIsScrolled(true); // Если прокрутка произошла, устанавливаем isScrolled в true
+        setIsScrolled(true); 
       } else {
-        setIsScrolled(false); // В противном случае устанавливаем isScrolled в false
+        setIsScrolled(false); 
       }
     };
 
-    window.addEventListener("scroll", handleScroll); // Добавляем обработчик события прокрутки
+    window.addEventListener("scroll", handleScroll); 
 
     return () => {
-      window.removeEventListener("scroll", handleScroll); // Удаляем обработчик события при размонтировании компонента
+      window.removeEventListener("scroll", handleScroll); 
     };
   }, []);
 
@@ -56,7 +56,7 @@ export default function NavBar() {
             component="div"
             sx={{ fontFamily: "Roboto", marginLeft: 2 }}
           >
-            SkySky
+            TBSky
           </Typography>
         </Box>
 

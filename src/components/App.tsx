@@ -1,7 +1,6 @@
 import { ThemeProvider } from "@mui/material/styles";
 import "./App.css";
-import MainPage from "./main-page/main_page";
-import Tekst from "./main-page/temp";
+import MainPage from "./mainPage/mainPage";
 import NavBar from "./navigation/navigation";
 
 function App() {
@@ -9,7 +8,6 @@ function App() {
     <ThemeProvider theme={theme}>
       <NavBar />
       <MainPage />
-      <Tekst />
     </ThemeProvider>
   );
 }
