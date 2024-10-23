@@ -1,0 +1,8 @@
+.transparent .MuiAppBar-root {
+    background-color: transparent !important; 
+}
+
+.scrolled .MuiAppBar-root {
+    background-color: white !important; 
+    transition: background-color 0.3s;
+}

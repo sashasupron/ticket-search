@@ -1,0 +1,1 @@
+export { BoxMainPage } from "./ui/boxMainPage"

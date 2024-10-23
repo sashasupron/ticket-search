@@ -1,18 +1,11 @@
-"use client";
-import "./globals.css";
+"use client"; 
 
-import "@/components/App.css";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Outlet } from 'react-router-dom';
+import "@/app/styles/globals.css";
 import React from "react";
-
-import NavBar from "@/components/navigation/navigation";
-import "./index.css";
-
-const theme = createTheme({
-  typography: {
-    fontFamily: "Roboto, sans-serif",
-  },
-});
+import { Providers } from "@/app/providers/providers";
+import { NavBar } from "@/widgets/header/ui/navigation";
+import "@/app/styles/index.css";
 
 export default function RootLayout({
   children,
@@ -22,10 +15,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeProvider theme={theme}>
-          <NavBar />
-          {children}
-        </ThemeProvider>
+        <Providers>
+          <React.Fragment>
+            <NavBar />
+            {children}
+          </React.Fragment>
+        </Providers>
       </body>
     </html>
   );

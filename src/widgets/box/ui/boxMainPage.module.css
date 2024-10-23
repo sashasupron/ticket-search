@@ -1,0 +1,36 @@
+.mainPageBox {
+    position: absolute;
+    bottom: 32%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 61%;
+    height: 120px;
+    border-radius: 8px; 
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 2%;
+}
+  
+
+.mainPageBox .searchButton {
+    width: 9.5rem; 
+    height: 3.5rem; 
+}
+
+
+
+.datePicker {
+    margin-top: 0.5rem;
+    /* width: 70% !important; */
+    /* margin-right: -2rem; */
+}
+
+
+.inputs {
+    width: 100%;
+    margin-right: 6rem !important;
+}
+
+
+.mainPageBox .passengersAmount {
+    width: 130px !important;
+}
