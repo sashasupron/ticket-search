@@ -1,0 +1,9 @@
+
+.ticketPage {
+    background-color: rgba(211, 210, 211, 0.8);
+    padding: 0;
+    margin: -10px;
+    height: 100vh;
+    overflow: hidden;
+}
+

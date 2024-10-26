@@ -1,13 +1,13 @@
 import React from 'react';
 
 interface TicketProps {
-    flightNumber: string;  // Номер рейса
-    departureTime: string;  // Время вылета
-    arrivalTime: string;    // Время прибытия
-    departureCity: string;  // Город вылета
-    arrivalCity: string;    // Город прибытия
-    price: number;          // Цена билета
-    airline: string;        // Авиакомпания
+    flightNumber: string;  
+    departureTime: string;  
+    arrivalTime: string;    
+    departureCity: string;  
+    arrivalCity: string;   
+    price: number;         
+    airline: string;       
 }
 
 export const Ticket: React.FC<TicketProps> = ({
@@ -23,18 +23,18 @@ export const Ticket: React.FC<TicketProps> = ({
         <div className="ticket">
             <div className="ticket-header">
                 <h2>{airline}</h2>
-                <p>Рейс: {flightNumber}</p>
+                <p>Flight: {flightNumber}</p>
             </div>
             <div className="ticket-info">
                 <div>
-                    <strong>Отправление:</strong> {departureCity} в {departureTime}
+                    <strong>Departure city:</strong> {departureCity} в {departureTime}
                 </div>
                 <div>
-                    <strong>Прибытие:</strong> {arrivalCity} в {arrivalTime}
+                    <strong>Arrival city:</strong> {arrivalCity} в {arrivalTime}
                 </div>
             </div>
             <div className="ticket-price">
-                <p>Цена: {price} ₽</p>
+                <p>Price: {price} </p>
             </div>
         </div>
     );

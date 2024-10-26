@@ -1,10 +1,9 @@
 "use client";
-
 import { useState, useEffect } from 'react';
-import httpClient from '@/shared/api/https/test';
 
 export const useTicketData = () => {
-    const [tickets, setTickets] = useState([]);
+
+    const [tickets, setTickets] = useState([]); 
     const [isLoading, setIsLoading] = useState(true);
 
     // useEffect(() => {
@@ -18,14 +17,20 @@ export const useTicketData = () => {
 
 
     useEffect(() => {
-        fetch('/tickets.txt')  
-            .then((response) => response.json()) 
+        fetch("/tickets.txt")  
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("File not found");
+                }
+                return response.json();
+            }) 
             .then((data) => {
                 setTickets(data);
                 setIsLoading(false);
             })
             .catch(() => setIsLoading(false));
     }, []);
+    
 
     return { tickets, isLoading };
 };

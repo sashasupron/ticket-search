@@ -1,6 +1,4 @@
 "use client"; 
-
-import { Outlet } from 'react-router-dom';
 import "@/app/styles/globals.css";
 import React from "react";
 import { Providers } from "@/app/providers/providers";

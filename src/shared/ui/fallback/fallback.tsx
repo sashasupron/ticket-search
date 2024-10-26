@@ -1,22 +1,37 @@
-import { Link, useRouteError } from 'react-router-dom'
-import ErrorImage from "@/shared/assets/images/errorImage.svg"
-import { RejectedDataType } from "@/shared/types/errorTypes"
+"use client";
+import Image from "next/image"; 
+import ErrorImage from "@/shared/assets/images/errorImage.svg";
+// import { useEffect } from 'react';
+// import { useRouter } from 'next/router'; 
+import { RejectedDataType } from "@/shared/types/errorTypes";
 
+interface FallbackProps {
+    error: RejectedDataType; 
+}
 
-export const Fallback = () => {
-    const error = useRouteError()
-    const knownError = error as RejectedDataType
+export const Fallback = ({ error }: FallbackProps) => {
+    // const router = useRouter();
+
+    // useEffect(() => {
+    //     if (router.isReady) {}
+    // }, [router]);
+
+    // const handleGoHome = () => {
+    //     if (router.isReady) { 
+    //         router.push('/');
+    //     }
+    // };
 
     return (
         <div role='alert' className='fallback'>
-            <ErrorImage className='fallback__img' />
+            <Image src={ErrorImage} alt="Error occurred" className='fallback__img' />
             <h1 className='fallback__img'>Something went wrong</h1>
             <span className='fallback__describe'>
-                {knownError?.messageError} {knownError?.status}
+                {error?.messageError} {error?.status}
             </span>
-            <Link to='/' className='fallback__link'>
+            {/* <button onClick={handleGoHome} className='fallback__link'>
                 Go to home page
-            </Link>
+            </button> */}
         </div>
-    )
+    );
 }

@@ -1,3 +1,4 @@
+"use client";
 import { Box, Grid2 } from "@mui/material";
 import { Buttons } from "@/shared/ui/buttons/buttons";
 import { DatePickers } from "@/shared/ui/pickers/datePicker";
@@ -5,31 +6,18 @@ import { Inputs } from "@/shared/ui/inputs/inputs";
 import { Selects } from "@/shared/ui/selects/selects";
 import styles from './boxMainPage.module.css';
 import clsx from "clsx";
-
+import Link from 'next/link';
 
 interface BoxMainPageProps {
   className?: string;
 }
 
-
 export function BoxMainPage({ className }: BoxMainPageProps) {
+
+
   return (
-    <Box
-      component="form"
-
-      className={clsx(styles.mainPageBox, className)}
-
-      noValidate
-      autoComplete="off"
-    >
-      <Grid2
-        container
-        spacing={2}
-        
-        sx={{
-          marginTop: "-10px",
-        }}
-      >
+    <Box component="form" className={clsx(styles.mainPageBox, className)} noValidate autoComplete="off">
+      <Grid2 container spacing={2} sx={{ marginTop: "-10px" }}>
         <Grid2>
           <Inputs label="Where from?" className={styles.inputs}/>
         </Grid2>
@@ -59,7 +47,6 @@ export function BoxMainPage({ className }: BoxMainPageProps) {
           <DatePickers label="Arrival date" className={styles.datePicker}/>
         </Grid2>
 
-
         <Grid2>
           <Selects
             label="Amount"
@@ -75,12 +62,14 @@ export function BoxMainPage({ className }: BoxMainPageProps) {
           />
         </Grid2>
 
-
-
         <Grid2>
-          <Buttons label="Search" className={styles.searchButton} />
+        <Link href="/ticketPage" passHref>
+          <Buttons 
+            label="Search" 
+            className={styles.searchButton} 
+          />
+          </Link>
         </Grid2>
-
       </Grid2>
     </Box>
   );

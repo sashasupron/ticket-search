@@ -1,10 +1,10 @@
 import Image from "next/image";
 import image from "@/shared/assets/images/background2-1-photoaidcom-darken.png";
-import { BoxMainPage } from "@/widgets/box/ui/boxMainPage";
+import { BoxMainPage } from "@/widgets/box/searchPage/ui/boxMainPage";
 import "./searchPage.module.css";
 import Description from "@/shared/ui/banners/bannerText";
 
-export function SearchPage() {
+const SearchPage = () => {
   return (
     <div className="fullscreen">
       <Image 
@@ -19,6 +19,5 @@ export function SearchPage() {
   
     </div>
   );
-}
-
-
+};
+export default SearchPage;
