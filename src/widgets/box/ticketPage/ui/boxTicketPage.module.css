@@ -1,4 +1,8 @@
 .ticketPageBox {
     background: #ffffff;
-    
+    top: 10% !important;
+    margin-top: 1rem;
+    border-radius: 10px;
+    width: 100% !important;
+    height: 40%;
 }
