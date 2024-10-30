@@ -1,22 +1,15 @@
 import image from "@/shared/assets/images/background2-1-photoaidcom-darken.png";
+import { BackgroundImage } from "@/shared/ui/backgroundImage";
 import Description from "@/shared/ui/banners/bannerText";
 import { BoxMainPage } from "@/widgets/box/searchPage/ui/boxMainPage";
-import Image from "next/image";
 import "./searchPage.module.css";
 
 const SearchPage = () => {
   return (
-    <div className="fullscreen">
-      <Image
-        src={image}
-        className="full-img"
-        alt={"Main page background"}
-        layout="fill"
-        objectFit="cover"
-      />
+    <BackgroundImage image={image} altImage="Main page background">
       <BoxMainPage />
       <Description label="Explore your adventures! Book flights now!" />
-    </div>
+    </BackgroundImage>
   );
 };
 export default SearchPage;
