@@ -2,6 +2,7 @@
 
 import { AppBar, Box, Toolbar, Typography } from "@mui/material";
 import Image from "next/image";
+import Link from "next/link"; 
 import airplaneIcon from "@/shared/assets/icons/airplane-travelling-around-earth-svgrepo-com.svg";
 import "./navigation.css";
 
@@ -16,6 +17,9 @@ export function NavBar() {
         paddingTop: 1.5,
         paddingLeft: 3,
         boxShadow: "none", 
+        fontSize: {
+          xs: 10,
+        }
       }}
     >
       <Toolbar
@@ -26,14 +30,29 @@ export function NavBar() {
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Image src={airplaneIcon} alt="Airplane Icon" width={24} height={24} />
-          <Typography
-            variant="h5"
-            component="div"
-            sx={{ fontFamily: "Roboto", marginLeft: 2 }}
-          >
-            TBSky
-          </Typography>
+          <Link href="/search" passHref>
+            <Image 
+              src={airplaneIcon} 
+              alt="Airplane Icon" 
+              width={24} 
+              height={24} 
+            />
+          </Link>
+
+          <Link href="/search" passHref>
+            <Typography
+              variant="h5"
+              component="div"
+              sx={{ 
+                fontFamily: "Roboto", 
+                marginLeft: 2,
+                color: "white" 
+              }}              
+            >
+              TBSky
+            </Typography>
+          </Link>
+          
         </Box>
 
         <Box sx={{ display: "flex", alignItems: "center" }}>

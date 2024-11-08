@@ -11,17 +11,35 @@ function Description({ label }: TextProps) {
   return (
     <div className="description-container">
       <Typography
-        style={{
-          color: "rgba(255, 255, 255, 1)",
-          fontFamily: "Roboto",
-          fontWeight: "100",
-          fontSize: "40px",
-          marginBottom: "40px",
-          position: "absolute", 
-          bottom: "15%", 
-          left: "22%", 
-          zIndex: 1, 
-        }}
+       sx={{
+        color: "rgba(255, 255, 255, 1)",
+        fontFamily: "Roboto",
+        fontWeight: "100",
+        fontSize: {
+          xs: 20,
+          sm: 21,
+          md: 28,
+          lg: 33,
+          xl: 43,
+        },
+        marginBottom: "40px",
+        position: "absolute",
+
+        bottom: { 
+          xs: "65%",
+          sm: "25%",
+          md: "15%",
+          lg: "15%",
+          xl: "15%",
+        },
+
+        left: "50%",
+
+        transform: "translateX(-50%)", 
+        zIndex: 1,
+
+        textAlign: "center",
+      }}
       >
         {label}
       </Typography>

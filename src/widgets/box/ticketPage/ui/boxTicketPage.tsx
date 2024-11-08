@@ -16,7 +16,25 @@ interface BoxTicketPageProps {
 
 const BoxTicketPage = ({ className, ticket }: BoxTicketPageProps) => {
     return (
-        <Box className={clsx(styles.ticketPageBox, className)}>
+        <Box 
+            className={clsx(styles.ticketPageBox, className)}
+            sx={{ height: {
+                xs: 100,
+                sm: 140,
+                md: 160,
+                lg: 160,
+                xl: 180,
+              },
+
+              width: {
+                xs: 350,
+                sm: 600,
+                md: 700,
+                lg: 800,
+                xl: 900,
+              },
+            }}
+        >
             <Grid2 container spacing={2}>
                 <Grid2>
                     <h2>{ticket.name}</h2>

@@ -24,8 +24,16 @@ export function DatePickers({ label, className }: DatePickerProps) {
 
         minDate={today}
         format="DD/MM/YYYY"
+
+        sx={{width: {
+          xs: 137,
+          sm: 138,
+          md: 172,
+          lg: 207,
+          xl: 207,
+        },
+      }}
       />
-      
     </LocalizationProvider>
   );
 }

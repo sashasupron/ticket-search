@@ -17,6 +17,17 @@ export function Inputs({ label, className }: InputsProps) {
 
 
         className={clsx(styles.inputs, className)}
+
+        sx={{width: {
+          xs: 290,
+          sm: 220,
+          md: 255,
+          lg: 290,
+          xl: 290,
+        },
+        // marginTop: 5,
+      }}
+        
       />
     </div>
   );

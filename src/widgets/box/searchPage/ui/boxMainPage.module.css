@@ -1,29 +1,19 @@
 .mainPageBox {
-    position: absolute;
-    bottom: 32%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 61%;
-    height: 120px;
+    /* position: absolute; */
+    /* left: 50%; */
+    /* transform: translateX(-50%); */
     border-radius: 8px; 
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 2%;
 }
-  
+
+.centered {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Центрирование по обоим осям */
+    position: absolute; /* Должен быть абсолютным для центрирования */
+}
+
 
 .mainPageBox .searchButton {
-    width: 9.5rem; 
     height: 3.5rem; 
-}
-
-
-
-.inputs {
-    width: 100%;
-    margin-right: 6rem !important;
-}
-
-
-.mainPageBox .passengersAmount {
-    width: 130px !important;
 }

@@ -6,16 +6,14 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useState } from "react";
 import clsx from "clsx"; 
 import styles from "./selects.module.css"; 
-import { SxProps } from "@mui/material"
 
 interface SelectProps {
   label: string;
   className?: string;
   menuItems: { value: string; label: string }[]; 
-  sx?: SxProps;
 }
 
-export function Selects({ label, className, menuItems, sx}: SelectProps) {
+export function Selects({ label, className, menuItems}: SelectProps) {
   const [classType, setClassType] = useState("");
 
   const handleClassChange = (event: SelectChangeEvent) => {
@@ -27,7 +25,8 @@ export function Selects({ label, className, menuItems, sx}: SelectProps) {
       <FormControl 
         variant="filled" 
         className={clsx(styles.customSelect, className)}
-        sx={sx}>
+        sx={{ width: '100%' }}
+        >
           
         <InputLabel id="demo-simple-select-filled-label"> {label} </InputLabel>
 
@@ -36,6 +35,15 @@ export function Selects({ label, className, menuItems, sx}: SelectProps) {
           id="classType"
           value={classType}
           onChange={handleClassChange}
+
+          sx={{width: {
+            xs: 290,
+            sm: 120,
+            md: 150,
+            lg: 180,
+            xl: 180,
+          },
+        }}
         >
           {menuItems.map((item) => (
             <MenuItem key={item.value} value={item.value}>

@@ -2,7 +2,7 @@
 import { Box, Grid2 } from "@mui/material";
 import { Buttons } from "@/shared/ui/buttons/buttons";
 import { DatePickers } from "@/shared/ui/pickers/datePicker";
-import { Inputs } from "@/shared/ui/inputs/inputs";
+import { Autocompletes } from "@/shared/ui/autocomplete/autocomplete";
 import { Selects } from "@/shared/ui/selects/selects";
 import styles from './boxMainPage.module.css';
 import clsx from "clsx";
@@ -16,14 +16,40 @@ export function BoxMainPage({ className }: BoxMainPageProps) {
 
 
   return (
-    <Box component="form" className={clsx(styles.mainPageBox, className)} noValidate autoComplete="off">
+    <Box
+      component="form" 
+      className={clsx(styles.mainPageBox, className)} 
+      noValidate autoComplete="off"
+      sx={{width: {
+          xs: 300,
+          sm: 600,
+          md: 700,
+          lg: 800,
+          xl: 800,
+        },
+        height: {
+          xs: 420,
+          sm: 110,
+          md: 110,
+          lg: 110,
+          xl: 110,
+        },
+
+        padding: {
+          xs: 3,
+          xl: 4,
+        },
+
+        
+      }}
+    >
       <Grid2 container spacing={2} sx={{ marginTop: "-10px" }}>
         <Grid2>
-          <Inputs label="Where from?" className={styles.inputs}/>
+          <Autocompletes label="Where from?" className={styles.inputs}/>
         </Grid2>
 
         <Grid2>
-          <Inputs label="Where to?" className={styles.inputs}/>
+          <Autocompletes label="Where to?" className={styles.inputs}/>
         </Grid2>
 
         <Grid2>
@@ -35,7 +61,6 @@ export function BoxMainPage({ className }: BoxMainPageProps) {
               { value: "Business", label: "Business" },
               { value: "FirstClass", label: "First Class" },
             ]}
-            sx={{ width: 185 }}
           />
         </Grid2>
 
@@ -58,12 +83,11 @@ export function BoxMainPage({ className }: BoxMainPageProps) {
               { value: "4", label: "4" },
               { value: "5", label: "5" },
             ]}
-            sx={{ width: 130 }}
           />
         </Grid2>
 
         <Grid2>
-        <Link href="/ticketPage" passHref>
+        <Link href="/tickets" passHref>
           <Buttons 
             label="Search" 
             className={styles.searchButton} 

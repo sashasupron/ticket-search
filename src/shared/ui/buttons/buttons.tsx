@@ -13,6 +13,16 @@ interface ButtonsProps {
 export function Buttons({ label, className, onClick }: ButtonsProps) {
   return (
     <Button
+      sx={{width: {
+        xs: 290,
+        sm: 150,
+        md: 150,
+        lg: 150,
+        xl: 150,
+      },
+      }}
+
+      
       onClick={() => {
         if (onClick) { 
           onClick(); 
