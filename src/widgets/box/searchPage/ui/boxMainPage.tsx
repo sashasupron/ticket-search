@@ -1,5 +1,5 @@
 "use client";
-import { Box, Grid2 } from "@mui/material";
+import { Box, Grid2, SxProps } from "@mui/material";
 import { Buttons } from "@/shared/ui/buttons/buttons";
 import { DatePickers } from "@/shared/ui/pickers/datePicker";
 import { Autocompletes } from "@/shared/ui/autocomplete/autocomplete";
@@ -10,9 +10,10 @@ import Link from 'next/link';
 
 interface BoxMainPageProps {
   className?: string;
+  sx?: SxProps;
 }
 
-export function BoxMainPage({ className }: BoxMainPageProps) {
+export function BoxMainPage({ className, sx }: BoxMainPageProps) {
 
 
   return (
@@ -20,28 +21,7 @@ export function BoxMainPage({ className }: BoxMainPageProps) {
       component="form" 
       className={clsx(styles.mainPageBox, className)} 
       noValidate autoComplete="off"
-      sx={{width: {
-          xs: 300,
-          sm: 600,
-          md: 700,
-          lg: 800,
-          xl: 800,
-        },
-        height: {
-          xs: 420,
-          sm: 110,
-          md: 110,
-          lg: 110,
-          xl: 110,
-        },
-
-        padding: {
-          xs: 3,
-          xl: 4,
-        },
-
-        
-      }}
+      sx={sx}
     >
       <Grid2 container spacing={2} sx={{ marginTop: "-10px" }}>
         <Grid2>
@@ -65,11 +45,33 @@ export function BoxMainPage({ className }: BoxMainPageProps) {
         </Grid2>
 
         <Grid2>
-          <DatePickers label="Departure date" className={styles.datePicker}/>
+          <DatePickers 
+            label="Departure date" 
+            className={styles.datePicker}
+            
+            sx={{width: {
+              xs: 137,
+              sm: 138,
+              md: 172,
+              lg: 207,
+              xl: 207,
+            },
+          }}/>
         </Grid2>
 
         <Grid2>
-          <DatePickers label="Arrival date" className={styles.datePicker}/>
+          <DatePickers 
+            label="Arrival date" 
+            className={styles.datePicker}
+            
+            sx={{width: {
+              xs: 137,
+              sm: 138,
+              md: 172,
+              lg: 207,
+              xl: 207,
+            },
+          }}/>
         </Grid2>
 
         <Grid2>
@@ -91,6 +93,14 @@ export function BoxMainPage({ className }: BoxMainPageProps) {
           <Buttons 
             label="Search" 
             className={styles.searchButton} 
+            sx={{width: {
+              xs: 290,
+              sm: 150,
+              md: 150,
+              lg: 150,
+              xl: 150,
+            },
+            }}
           />
           </Link>
         </Grid2>

@@ -4,12 +4,13 @@ import { Typography } from "@mui/material";
 
 interface TextProps {
   label: string;
+  sx?: React.CSSProperties;
 }
 
 
-function Description({ label }: TextProps) {
+function Description({ label, sx }: TextProps) {
   return (
-    <div className="description-container">
+    <div className="description-container" style={sx} >
       <Typography
        sx={{
         color: "rgba(255, 255, 255, 1)",
@@ -24,14 +25,6 @@ function Description({ label }: TextProps) {
         },
         marginBottom: "40px",
         position: "absolute",
-
-        bottom: { 
-          xs: "65%",
-          sm: "25%",
-          md: "15%",
-          lg: "15%",
-          xl: "15%",
-        },
 
         left: "50%",
 

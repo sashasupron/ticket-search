@@ -22,7 +22,7 @@ const BoxTicketPage = ({ className, ticket }: BoxTicketPageProps) => {
                 xs: 100,
                 sm: 140,
                 md: 160,
-                lg: 160,
+                lg: 180,
                 xl: 180,
               },
 
@@ -31,7 +31,7 @@ const BoxTicketPage = ({ className, ticket }: BoxTicketPageProps) => {
                 sm: 600,
                 md: 700,
                 lg: 800,
-                xl: 900,
+                xl: 960,
               },
             }}
         >

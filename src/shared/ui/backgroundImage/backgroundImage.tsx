@@ -1,6 +1,7 @@
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
 import { FC, ReactNode } from "react";
+import "./backgroundImage.module.css";
 
 export interface BackgroundImageProps {
   image: string | StaticImport;

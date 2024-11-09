@@ -1,17 +1,9 @@
 .mainPageBox {
-    /* position: absolute; */
-    /* left: 50%; */
-    /* transform: translateX(-50%); */
+    position: relative; 
     border-radius: 8px; 
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.centered {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Центрирование по обоим осям */
-    position: absolute; /* Должен быть абсолютным для центрирования */
-}
 
 
 .mainPageBox .searchButton {

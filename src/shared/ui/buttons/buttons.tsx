@@ -3,24 +3,19 @@ import Button from "@mui/material/Button";
 import TestClient from "@/shared/api/https/test.js";
 import clsx from "clsx";
 import styles from './buttons.module.css';
+import { SxProps } from "@mui/material";
 
 interface ButtonsProps {
   label: string;
   className?: string;
   onClick?: () => void;
+  sx?: SxProps;
 }
 
-export function Buttons({ label, className, onClick }: ButtonsProps) {
+export function Buttons({ label, className, onClick, sx }: ButtonsProps) {
   return (
     <Button
-      sx={{width: {
-        xs: 290,
-        sm: 150,
-        md: 150,
-        lg: 150,
-        xl: 150,
-      },
-      }}
+      sx={sx}
 
       
       onClick={() => {
