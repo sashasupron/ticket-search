@@ -1,6 +1,6 @@
 import image from "@/shared/assets/images/background2-1-photoaidcom-darken.png";
 import { BackgroundImage } from "@/shared/ui/backgroundImage";
-import { BoxMainPage } from "@/widgets/box/searchPage/ui/boxMainPage";
+import { BoxMainPage } from "@/shared/widgets/box/searchPage/ui/boxMainPage";
 import styles from "./search.module.css";
 import { Typography } from '@mui/material';
 
@@ -21,7 +21,7 @@ const Search = () => {
           xs: 420,
           sm: 120,
           md: 130,
-          lg: 135,
+          lg: 150,
           xl: 110,
         },
 

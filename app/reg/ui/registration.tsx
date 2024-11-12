@@ -1,6 +1,6 @@
 import image from "@/shared/assets/images/Unknown-6-modified.jpg";
 import { BackgroundImage } from "@/shared/ui/backgroundImage";
-import { BoxRegPage } from "@/widgets/box/registration/ui/boxRegPage"
+import { BoxRegPage } from "@/shared/widgets/box/registration/ui/boxRegPage"
 import styles from "./registration.module.css";
 import { Typography } from "@mui/material";
 

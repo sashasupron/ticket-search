@@ -1,12 +1,12 @@
 "use client";
 
-import BoxTicketPage from "@/widgets/box/ticketPage/ui/boxTicketPage";
+import BoxTicketPage from "@/shared/widgets/box/ticketPage/ui/boxTicketPage";
 import { useEffect } from "react";
 import { useTicketData } from "../model/useTicketData";
 import styles from "./ticketPage.module.css";
 import image from "@/shared/assets/images/image.jpg";
 import { BackgroundImage } from "@/shared/ui/backgroundImage";
-import { BoxMainPage } from "@/widgets/box/searchPage/ui/boxMainPage";
+import { BoxMainPage } from "@/shared/widgets/box/searchPage/ui/boxMainPage";
 import { Box, Typography } from "@mui/material";
 
 

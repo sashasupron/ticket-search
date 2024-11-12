@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@/app/providers";
 import "@/app/styles/globals.css";
 import "@/app/styles/index.css";
-import { NavBar } from "@/widgets/header/ui/navigation";
+import { NavBar } from "@/shared/widgets/header/ui/navigation";
 import React from "react";
 
 export default function RootLayout({

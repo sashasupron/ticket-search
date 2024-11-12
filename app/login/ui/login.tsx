@@ -1,6 +1,6 @@
 import image from "@/shared/assets/images/Unknown-6-modified.jpg";
 import { BackgroundImage } from "@/shared/ui/backgroundImage";
-import { BoxLoginPage } from "@/widgets/box/login/boxLoginPage"
+import { BoxLoginPage } from "@/shared/widgets/box/login/boxLoginPage"
 import styles from "./login.module.css";
 import { Typography } from "@mui/material";
 

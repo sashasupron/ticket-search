@@ -1,6 +1,6 @@
 "use client";
 import Button from "@mui/material/Button";
-import TestClient from "@/shared/api/https/test.js";
+// import TestClient from "@/shared/api/https/test.js";
 import clsx from "clsx";
 import styles from './buttons.module.css';
 import { SxProps } from "@mui/material";
@@ -23,9 +23,9 @@ export function Buttons({ label, className, onClick, sx }: ButtonsProps) {
           onClick(); 
         }
 
-        TestClient.sendGet().then((res) => {
-          alert(res.data);
-        });
+        // TestClient.sendGet().then((res) => {
+        //   alert(res.data);
+        // });
       }}
 
       variant="outlined"

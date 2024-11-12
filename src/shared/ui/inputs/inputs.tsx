@@ -24,4 +24,3 @@ export function Inputs({ label, className, sx }: InputsProps) {
     </div>
   );
 }
-
