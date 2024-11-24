@@ -10,7 +10,7 @@ const Search = () => {
       <div className={styles.searchPage}>
       <BoxMainPage 
         sx={{ width: {
-          xs: 300,
+          xs: 340,
           sm: 600,
           md: 700,
           lg: 800,

@@ -4,11 +4,10 @@ import { TextField } from "@mui/material";
 import clsx from "clsx";
 import styles from "./autocomplete.module.css";
 
+
 interface AutocompleteProps {
   label: string;
   className?: string;
-  onChange: (newValue: string | null) => void;
-  value: string;
 }
 
 interface Airport {
@@ -17,9 +16,8 @@ interface Airport {
   id: string;
 }
 
-export function Autocompletes({ label, className, value, onChange }: AutocompleteProps) {
+export function Autocompletes({ label, className }: AutocompleteProps) {
   const [airports, setAirports] = useState<Airport[]>([]);
-  const [selectedAirport, setSelectedAirport] = useState<string | null>(value || "");
 
   useEffect(() => {
     const fetchAirports = async () => {
@@ -51,11 +49,6 @@ export function Autocompletes({ label, className, value, onChange }: Autocomplet
     fetchAirports();
   }, []);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: Airport | null) => {
-    const airportLabel = newValue ? `${newValue.city}, ${newValue.country}` : "";
-    setSelectedAirport(airportLabel);
-    onChange(airportLabel);
-  };
 
   return (
     <div>
@@ -63,8 +56,6 @@ export function Autocompletes({ label, className, value, onChange }: Autocomplet
         disablePortal
         options={airports}
         getOptionLabel={(option) => `${option.city}, ${option.country}`}
-        value={airports.find(airport => `${airport.city}, ${airport.country}` === selectedAirport) || null}
-        onChange={handleChange}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -74,7 +65,7 @@ export function Autocompletes({ label, className, value, onChange }: Autocomplet
             className={clsx(styles.autocompletes, className)}
             sx={{
               width: {
-                xs: 290,
+                xs: 327,
                 sm: 220,
                 md: 255,
                 lg: 290,
