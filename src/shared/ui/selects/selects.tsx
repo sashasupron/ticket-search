@@ -11,15 +11,15 @@ interface SelectProps {
   className?: string;
   menuItems: { value: string; label: string }[];
   onChange?: (value: string) => void;
+  value?: string;
 }
 
-export function Selects({ label, className, menuItems, onChange }: SelectProps) {
-  const [classType, setClassType] = useState("");
+export function Selects({ label, className, menuItems, onChange, value }: SelectProps) {
   const [isError, setIsError] = useState(false);
 
+ 
   const handleClassChange = (event: SelectChangeEvent<string>) => {
-    const value = event.target.value as string;
-    setClassType(value);
+    const value = event.target.value;
     setIsError(value === "");
     if (onChange) {
       onChange(value);
@@ -27,7 +27,7 @@ export function Selects({ label, className, menuItems, onChange }: SelectProps) 
   };
 
   const handleBlur = () => {
-    setIsError(classType === "");
+    setIsError(value === "");
   };
 
   return (
@@ -41,8 +41,8 @@ export function Selects({ label, className, menuItems, onChange }: SelectProps) 
       <Select
         labelId="select-label"
         id="classType"
-        value={classType}
-        onChange={handleClassChange}
+        value={value}
+        onChange={handleClassChange} 
         onBlur={handleBlur}
         sx={{
           width: {

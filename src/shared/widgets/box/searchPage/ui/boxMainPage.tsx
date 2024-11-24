@@ -7,6 +7,8 @@ import styles from './boxMainPage.module.css';
 import clsx from "clsx";
 import { useRouter } from 'next/navigation';
 import React, { useState } from "react";
+import { SelectChangeEvent } from "@mui/material/Select";
+
 
 interface BoxMainPageProps {
   className?: string;
@@ -15,24 +17,43 @@ interface BoxMainPageProps {
 
 export function BoxMainPage({ className, sx }: BoxMainPageProps) {
   const router = useRouter();
+  // const [fromLocation, setFromLocation] = useState('');
   const [fromLocation, setFromLocation] = useState('');
+  const [toLocation, setToLocation] = useState('');
   const [classType, setClassType] = useState('');
   const [pasAmount, setPasAmount] = useState('');
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  const handleClassChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setClassType(event.target.value as string);
+
+  const handleFromLocationChange = (event: React.SyntheticEvent, newValue: string | null) => {
+    setFromLocation(newValue || "");
+    setError("");
+  };
+
+  const handleToLocationChange = (event: React.SyntheticEvent, newValue: string | null) => {
+    setToLocation(newValue || "");
+    setError("");
+  };
+
+
+  const handleClassChange = (event: SelectChangeEvent<string>) => {
+    setClassType(event.target.value);
     setError('');
   };
+
 
   const handleAmountChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     setPasAmount(event.target.value as string);
     setError('');
   };
 
+
   const handleSubmit = () => {
-    if (!classType) {
+    if (!fromLocation) {
+      setError("Please select a from.");
+      setOpenSnackbar(true);
+    } else if (!classType) {
       setError("Please select a class.");
       setOpenSnackbar(true);
     } else if (!pasAmount) {
@@ -57,13 +78,30 @@ export function BoxMainPage({ className, sx }: BoxMainPageProps) {
     >
       <Grid2 container spacing={2} sx={{ marginTop: "-10px" }}>
         <Grid2>
-          <Autocompletes label="Where from?" className={styles.inputs} 
-          />
+          <FormControl fullWidth variant="filled" error={!fromLocation && !!error}>
+            <Autocompletes 
+              label="Where from?" 
+              className={styles.inputs} 
+              value={fromLocation}
+              onChange={handleFromLocationChange}
+            />
+          </FormControl>
         </Grid2>
 
+
+
         <Grid2>
-          <Autocompletes label="Where to?" className={styles.inputs} />
+          <FormControl fullWidth variant="filled" error={!toLocation && !!error}>
+            <Autocompletes 
+              label="Where to?" 
+              className={styles.inputs} 
+              value={toLocation}
+              onChange={handleToLocationChange}
+            />
+          </FormControl>
         </Grid2>
+
+
 
         <Grid2>
           <FormControl fullWidth variant="filled" error={!classType && !!error}>

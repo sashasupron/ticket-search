@@ -7,8 +7,8 @@ import styles from "./autocomplete.module.css";
 interface AutocompleteProps {
   label: string;
   className?: string;
-  value?: string;
-  onChange?: (value: string) => void;
+  onChange: (newValue: string | null) => void;
+  value: string;
 }
 
 interface Airport {
@@ -54,9 +54,7 @@ export function Autocompletes({ label, className, value, onChange }: Autocomplet
   const handleChange = (event: React.SyntheticEvent, newValue: Airport | null) => {
     const airportLabel = newValue ? `${newValue.city}, ${newValue.country}` : "";
     setSelectedAirport(airportLabel);
-    if (onChange) {
-      onChange(airportLabel);
-    }
+    onChange(airportLabel);
   };
 
   return (

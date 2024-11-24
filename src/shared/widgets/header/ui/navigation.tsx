@@ -30,7 +30,7 @@ export function NavBar() {
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Link href="/search" passHref>
+          <Link href="/search" passHref className = "link">
             <Image 
               src={airplaneIcon} 
               alt="Airplane Icon" 
@@ -39,7 +39,7 @@ export function NavBar() {
             />
           </Link>
 
-          <Link href="/search" passHref>
+          <Link href="/search" passHref className = "link">
             <Typography
               variant="h5"
               component="div"
@@ -56,9 +56,12 @@ export function NavBar() {
         </Box>
 
         <Box sx={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h5" component="div" sx={{ marginTop: 0.5 }}>
-            Login
-          </Typography>
+          <Link href="/login" passHref className = "link">
+            <Typography variant="h5" component="div" sx={{ marginTop: 0.5 }}>
+              Login
+            </Typography>
+          </Link >
+
           <Typography
             variant="h5"
             component="div"
