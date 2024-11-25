@@ -8,22 +8,46 @@ import { Selects } from "@/shared/ui/selects/selects"
 import clsx from "clsx";
 import { useRouter } from 'next/navigation';
 import React, { useState } from "react";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 interface BoxMainPageProps {
   className?: string;
   sx?: SxProps;
+  fromLocation?: string;
+  toLocation?: string;
+  classType?: string;
+  departureDate?: Dayjs | null;
+  arrivalDate?: Dayjs | null;
+  passengersAmount?: string;
 }
 
-export function BoxMainPage({ className, sx }: BoxMainPageProps) {
+export function BoxMainPage({
+  className,
+  sx,
+  fromLocation = "", 
+  toLocation = "",
+  classType = "",
+  departureDate = null,
+  arrivalDate = null,
+  passengersAmount = "",
+}: BoxMainPageProps) {
   const router = useRouter();
 
-  const [fromLocation, setFromLocation] = useState("");
-  const [toLocation, setToLocation] = useState("");
-  const [classType, setClassType] = useState("");
-  const [departureDate, setDepartureDate] = useState<Dayjs | null>(null);
-  const [arrivalDate, setArrivalDate] = useState<Dayjs | null>(null);
-  const [passengersAmount, setPassengersAmount] = useState("");
+  const [currentFromLocation, setFromLocation] = useState(fromLocation);
+  const [currentToLocation, setToLocation] = useState(toLocation);
+  const [currentClassType, setClassType] = useState(classType);
+
+  const [currentDepartureDate, setDepartureDate] = useState<Dayjs | null>(
+    departureDate ? dayjs(departureDate) : null
+  );
+
+  const [currentArrivalDate, setArrivalDate] = useState<Dayjs | null>(
+    arrivalDate ? dayjs(arrivalDate) : null
+  );
+
+  const [currentPassengersAmount, setPassengersAmount] = useState(
+    passengersAmount
+  );
   
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -31,43 +55,64 @@ export function BoxMainPage({ className, sx }: BoxMainPageProps) {
 
 
   const handleSearch = () => {
-    if (!fromLocation) {
+    if (!currentFromLocation) {
       setError("Please select an departure location");
       setOpenSnackbar(true);
       return
 
-    } else if (!toLocation) {
+    } else if (!currentToLocation) {
       setError("Please select a destination location");
       setOpenSnackbar(true);
       return
 
-    } else if (!classType) {
+    } else if (!currentClassType) {
       setError("Please select a class.");
       setOpenSnackbar(true);
       return
 
-    } else if (!arrivalDate) {
+    } else if (!currentArrivalDate) {
       setError("Please select an arrival date");
       setOpenSnackbar(true);
       return
     
-    } else if (!departureDate) {
+    } else if (!currentDepartureDate) {
       setError("Please select a departure date");
       setOpenSnackbar(true);
       return
 
-    } else if (!passengersAmount) {
+    } else if (!currentPassengersAmount) {
       setError("Please select a passengers amount");
       setOpenSnackbar(true);
       return
 
-    } else if (!passengersAmount) {
+    } else if (!currentPassengersAmount) {
       setError("Please select a passengers amount");
       setOpenSnackbar(true);
       return
     } 
 
-    router.push(`/tickets?from=${fromLocation}&to=${toLocation}&class=${classType}&departure=${departureDate}&arrival=${arrivalDate}&passengers=${passengersAmount}`);
+    router.push(`/tickets?from=${currentFromLocation}&to=${currentToLocation}&class=${currentClassType}&departure=${currentDepartureDate}&arrival=${currentArrivalDate}&passengers=${currentPassengersAmount}`);
+  };
+
+
+
+  const handleFromChange = (newValue: string | null) => {
+    if (newValue === currentToLocation) {
+      setError("Departure and arrival locations cannot be the same.");
+    } else {
+      setFromLocation(newValue || "");
+      setError(""); 
+    }
+  };
+
+
+  const handleToChange = (newValue: string | null) => {
+    if (newValue === currentFromLocation) {
+      setError("Departure and arrival locations cannot be the same.");
+    } else {
+      setToLocation(newValue || "");
+      setError(""); 
+    }
   };
 
 
@@ -89,8 +134,8 @@ export function BoxMainPage({ className, sx }: BoxMainPageProps) {
           <Autocompletes 
             label="Where from?" 
             className={styles.inputs}
-            value={fromLocation}
-            onChange={(newValue) => setFromLocation(newValue || "")}
+            value={currentFromLocation}
+            onChange={handleFromChange}
           />
         </Grid2>
 
@@ -98,8 +143,8 @@ export function BoxMainPage({ className, sx }: BoxMainPageProps) {
           <Autocompletes 
             label="Where to?" 
             className={styles.inputs} 
-            value={toLocation}
-            onChange={(newValue) => setToLocation(newValue || "")}
+            value={currentToLocation}
+            onChange={handleToChange}
           />
         </Grid2>
 
@@ -107,7 +152,7 @@ export function BoxMainPage({ className, sx }: BoxMainPageProps) {
         <Grid2>
           <Selects
             label="Class"
-            value={classType} 
+            value={currentClassType} 
             onChange={(newValue) => setClassType(newValue)} 
             menuItems={[
               { value: "Econom", label: "Econom" },
@@ -123,7 +168,7 @@ export function BoxMainPage({ className, sx }: BoxMainPageProps) {
           <DatePickers 
             label="Departure date" 
             className={styles.datePicker}
-            value={departureDate}
+            value={currentDepartureDate}
             onChange={(date) => setDepartureDate(date)}
             sx={{ width: { xs: 155, sm: 138, md: 172, lg: 207, xl: 207 }}}
           />
@@ -133,7 +178,7 @@ export function BoxMainPage({ className, sx }: BoxMainPageProps) {
           <DatePickers 
             label="Arrival date" 
             className={styles.datePicker}
-            value={arrivalDate}
+            value={currentArrivalDate}
             onChange={(date) => setArrivalDate(date)}
             sx={{ width: { xs: 155, sm: 138, md: 172, lg: 207, xl: 207 }}}
           />
@@ -144,7 +189,7 @@ export function BoxMainPage({ className, sx }: BoxMainPageProps) {
         <Grid2>
           <Selects
             label="Amount"
-            value={passengersAmount}
+            value={currentPassengersAmount}
             onChange={(newValue) => setPassengersAmount(newValue)} 
             menuItems={[
               { value: "1", label: "1" },
