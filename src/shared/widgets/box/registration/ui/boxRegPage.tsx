@@ -109,7 +109,11 @@ export function BoxRegPage({ className }: BoxRegPageProps) {
               <Link href="/login" passHref >
               <Typography
                 component="div"
-                className="link"        
+                className="link" 
+                
+                sx={{
+                  "&:hover": { color: "#b5b5b3" }, 
+                }}
               >
                 Already have an account?
               </Typography>

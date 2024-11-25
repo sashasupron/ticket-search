@@ -57,7 +57,7 @@ export function NavBar() {
 
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <Link href="/login" passHref className = "link">
-            <Typography variant="h5" component="div" sx={{ marginTop: 0.5 }}>
+            <Typography variant="h5" component="div" sx={{ marginTop: 0.5, color: 'white' }}>
               Login
             </Typography>
           </Link >

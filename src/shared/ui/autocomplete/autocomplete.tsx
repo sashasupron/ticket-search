@@ -8,6 +8,8 @@ import styles from "./autocomplete.module.css";
 interface AutocompleteProps {
   label: string;
   className?: string;
+  value: string; 
+  onChange: (newValue: string | null) => void; 
 }
 
 interface Airport {
@@ -16,7 +18,8 @@ interface Airport {
   id: string;
 }
 
-export function Autocompletes({ label, className }: AutocompleteProps) {
+
+export function Autocompletes({ label, className, value, onChange }: AutocompleteProps) {
   const [airports, setAirports] = useState<Airport[]>([]);
 
   useEffect(() => {
@@ -56,24 +59,22 @@ export function Autocompletes({ label, className }: AutocompleteProps) {
         disablePortal
         options={airports}
         getOptionLabel={(option) => `${option.city}, ${option.country}`}
+        
+        value={airports.find(
+          (airport) => `${airport.city}, ${airport.country}` === value
+        ) || null}
+        onChange={(event, newValue) => onChange(newValue ? `${newValue.city}, ${newValue.country}` : null)}
+        
         renderInput={(params) => (
           <TextField
             {...params}
-            id="departurePlace"
             label={label}
             variant="filled"
             className={clsx(styles.autocompletes, className)}
-            sx={{
-              width: {
-                xs: 327,
-                sm: 220,
-                md: 255,
-                lg: 290,
-                xl: 290,
-              },
-            }}
+            sx={{ width: { xs: 327, sm: 220, md: 255, lg: 290, xl: 290,},}}
           />
         )}
+        
         renderOption={(props, option) => (
           <li {...props} key={option.id}>
             {`${option.city}, ${option.country}`}

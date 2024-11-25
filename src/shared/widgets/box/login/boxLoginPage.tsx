@@ -71,7 +71,10 @@ export function BoxLoginPage({ className }: BoxLoginPageProps) {
               <Link href="/reg" passHref >
                 <Typography
                   component="div"
-                  className="link"        
+                  className="link"    
+                  sx={{
+                    "&:hover": { color: "#b5b5b3" }, 
+                  }}
                 >
                   Create new account
                 </Typography>
@@ -80,7 +83,11 @@ export function BoxLoginPage({ className }: BoxLoginPageProps) {
               <Link href="/reg" passHref >
                 <Typography
                   component="div"
-                  className="link"        
+                  className="link"    
+                  
+                  sx={{
+                    "&:hover": { color: "#b5b5b3" }, 
+                  }}
                 >
                   Forgotten password?
                 </Typography>
