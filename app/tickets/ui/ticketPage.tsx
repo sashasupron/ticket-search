@@ -17,8 +17,8 @@ const TicketPage = () => {
   const fromLocation = searchParams?.get("from") || "";
   const toLocation = searchParams?.get("to") || "";
   const classType = searchParams?.get("class") || "";
-  const departureDateString = searchParams?.get("departure");
-  const arrivalDateString = searchParams?.get("arrival");
+  const departureDateString = searchParams?.get("departure") || null;;
+  const arrivalDateString = searchParams?.get("arrival") || null;;
   const passengersAmount = searchParams?.get("passengers") || "";
   
   const departureDate: Dayjs | null = departureDateString ? dayjs(departureDateString) : null;
@@ -36,7 +36,7 @@ const TicketPage = () => {
   }, []);
 
 
-  const { tickets, isLoading } = useTicketData();
+  const { tickets, isLoading } = useTicketData(fromLocation, toLocation, departureDateString);
 
   if (isLoading) {
     return <div> Loading... </div>;
@@ -77,14 +77,17 @@ const TicketPage = () => {
         Available Tickets
        </Typography>
 
-      <Box 
-        className={styles.ticketsContainer}
-        sx = {{ width: { xs: "60%", lg: "50%", xl: "40%" }}}>
 
-        {tickets.map((ticket) => (
-          <BoxTicketPage key={ticket.id} ticket={ticket} />
-        ))}
-      </Box>
+
+       <Box
+          className={styles.ticketsContainer}
+          sx={{ width: { xs: "60%", lg: "50%", xl: "40%" } }}
+        >
+          {tickets.map((ticket) => (
+            <BoxTicketPage key={ticket.flight.number} ticket={ticket} />
+          ))}
+        </Box>
+
     </div>
     </BackgroundImage>
   );

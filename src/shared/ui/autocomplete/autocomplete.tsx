@@ -16,6 +16,7 @@ interface Airport {
   city: string;
   country: string;
   id: string;
+  iata: string;
 }
 
 
@@ -38,10 +39,11 @@ export function Autocompletes({ label, className, value, onChange }: Autocomplet
             city: parts[2].replace(/"/g, ""),
             country: parts[3].replace(/"/g, ""),
             id: `${parts[2]}-${parts[3]}-${index}`,
+            iata: parts[4].replace(/"/g, ""),
           };
         }).filter((airport): airport is Airport => airport !== null);
 
-        const uniqueAirports = Array.from(new Map(airportList.map(airport => [`${airport.city}, ${airport.country}`, airport])).values());
+        const uniqueAirports = Array.from(new Map(airportList.map(airport => [airport.iata, airport])).values());
 
         setAirports(uniqueAirports);
       } catch (error) {
@@ -60,10 +62,8 @@ export function Autocompletes({ label, className, value, onChange }: Autocomplet
         options={airports}
         getOptionLabel={(option) => `${option.city}, ${option.country}`}
         
-        value={airports.find(
-          (airport) => `${airport.city}, ${airport.country}` === value
-        ) || null}
-        onChange={(event, newValue) => onChange(newValue ? `${newValue.city}, ${newValue.country}` : null)}
+        value={airports.find((airport) => airport.iata === value) || null}
+        onChange={(event, newValue) => onChange(newValue ? newValue.iata : null)}
         
         renderInput={(params) => (
           <TextField

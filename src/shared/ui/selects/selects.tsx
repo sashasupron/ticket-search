@@ -1,4 +1,3 @@
-"use client";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -8,17 +7,17 @@ import styles from "./selects.module.css";
 import { SxProps } from "@mui/material";
 
 interface SelectProps {
-  label: string; // Метка для поля выбора
-  className?: string; // Пользовательский класс стилей
-  menuItems: { value: string; label: string }[]; // Список опций
-  sx?: SxProps; // Стили для компонента
-  value: string; // Текущее значение
-  onChange: (value: string) => void; // Обработчик изменений
+  label: string; 
+  className?: string; 
+  menuItems: { value: string; label: string }[]; 
+  sx?: SxProps; 
+  value: string; 
+  onChange: (value: string) => void; 
 }
 
 export function Selects({ label, className, menuItems, sx, value, onChange }: SelectProps) {
   const handleClassChange = (event: SelectChangeEvent) => {
-    onChange(event.target.value as string); // Уведомляем родительский компонент
+    onChange(event.target.value as string); 
   };
 
   return (
@@ -33,7 +32,7 @@ export function Selects({ label, className, menuItems, sx, value, onChange }: Se
         <Select
           labelId="demo-simple-select-filled-label"
           id="classType"
-          value={value} // Используем значение из пропсов
+          value={value} 
           onChange={handleClassChange}
         >
           {menuItems.map((item) => (
