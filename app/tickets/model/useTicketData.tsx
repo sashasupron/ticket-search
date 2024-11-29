@@ -29,7 +29,7 @@ export const useTicketData = (
   toLocation: string,
   departureDate: string | null
 ): UseTicketDataResponse => {
-  const [tickets, setTickets] = useState<Ticket[]>([]); // Указываем тип для tickets
+  const [tickets, setTickets] = useState<Ticket[]>([]); 
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -41,9 +41,9 @@ export const useTicketData = (
       }
 
       try {
-        const response = await axios.get("http://api.aviationstack.com/v1/flights", {
+        const response = await axios.get("https://api.aviationstack.com/v1/flights", {
           params: {
-            access_key: "21c41abdff19fed84ba535c5c0ae5a13",
+            access_key: "e1c27f87a8a80a0e8daac001996e8cb8",
             dep_iata: fromLocation,
             arr_iata: toLocation,
             flight_date: departureDate,
