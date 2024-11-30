@@ -2,7 +2,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { SxProps } from '@mui/material';
-import dayjs, { Dayjs } from "dayjs";
+import { Dayjs } from "dayjs";
 import clsx from "clsx";
 import styles from './datePicker.module.css';
 
@@ -11,13 +11,14 @@ interface DatePickerProps {
   className?: string;
   sx?: SxProps;
   value: Dayjs | null; 
-  onChange: (date: Dayjs | null) => void;
+  onChange: (date: Dayjs | null) => void
+  minDate : Dayjs; 
 }
 
 
 
-export function DatePickers({ label, className, sx, value, onChange }: DatePickerProps) {
-  const today = dayjs();
+export function DatePickers({ label, className, sx, value, onChange, minDate }: DatePickerProps) {
+
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -26,7 +27,7 @@ export function DatePickers({ label, className, sx, value, onChange }: DatePicke
         label={label}
         value={value} 
         onChange={onChange}
-        minDate={today}
+        minDate={minDate}
         format="DD/MM/YYYY"
         sx={sx}
       />

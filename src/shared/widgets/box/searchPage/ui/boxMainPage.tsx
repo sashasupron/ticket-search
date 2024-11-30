@@ -32,7 +32,7 @@ export function BoxMainPage({
   passengersAmount = "",
 }: BoxMainPageProps) {
   const router = useRouter();
-
+  const today = dayjs();
   const [currentFromLocation, setFromLocation] = useState(fromLocation);
   const [currentToLocation, setToLocation] = useState(toLocation);
   const [currentClassType, setClassType] = useState(classType);
@@ -170,6 +170,7 @@ export function BoxMainPage({
             className={styles.datePicker}
             value={currentDepartureDate}
             onChange={(date) => setDepartureDate(date)}
+            minDate={today}
             sx={{ width: { xs: 155, sm: 138, md: 172, lg: 207, xl: 207 }}}
           />
         </Grid2>
@@ -180,6 +181,7 @@ export function BoxMainPage({
             className={styles.datePicker}
             value={currentArrivalDate}
             onChange={(date) => setArrivalDate(date)}
+            minDate={today}
             sx={{ width: { xs: 155, sm: 138, md: 172, lg: 207, xl: 207 }}}
           />
         </Grid2>

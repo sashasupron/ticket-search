@@ -7,7 +7,7 @@ import { DatePickers } from "@/shared/ui/pickers/datePicker";
 import { Buttons } from "@/shared/ui/buttons/buttons";
 import Link from "next/link";
 import { useState } from "react";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { useRouter } from 'next/navigation';
 
 interface BoxRegPageProps {
@@ -39,6 +39,12 @@ export function BoxRegPage({ className }: BoxRegPageProps) {
       setError("Please write a surname");
       setOpenSnackbar(true);
       return
+
+    } else if (!dateOfBirth) {
+      setError("Please write a date of birth");
+      setOpenSnackbar(true);
+      return
+    
     
     } else if (!mobilePhone) {
       setError("Please write a mobile phone");
@@ -52,11 +58,6 @@ export function BoxRegPage({ className }: BoxRegPageProps) {
 
     } else if (!passwordRegex.test(password)) { 
       setError("Please write a password, which contains min 8 signs, 1 large and 1 small letters and a special sign");
-      setOpenSnackbar(true);
-      return
-
-    } else if (!dateOfBirth) {
-      setError("Please write a date of birth");
       setOpenSnackbar(true);
       return
     }
@@ -164,6 +165,7 @@ export function BoxRegPage({ className }: BoxRegPageProps) {
                 className={styles.datePickers}
                 value={dateOfBirth}
                 onChange={(date) => setDateOfBirth(date)}
+                minDate = {dayjs('01/01/1950')}
                 sx = {{width: { xs: 137, sm: 150, md: 164, lg: 164, xl: 345}}}/>
             </Grid2>
 
