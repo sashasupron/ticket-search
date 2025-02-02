@@ -26,7 +26,8 @@
     "react-error-boundary": "^4.1.2",
     "react-hook-form": "^7.53.2",
     "react-redux": "^9.1.2",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "tailwindcss": "^3.4.1"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -36,7 +37,6 @@
     "eslint-config-next": "14.2.14",
     "postcss": "^8",
     "steiger": "^0.4.0",
-    "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }
 }
