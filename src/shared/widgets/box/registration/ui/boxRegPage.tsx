@@ -1,5 +1,5 @@
 "use client";
-import { Box, Grid2, Typography, Snackbar, Alert, Grow } from "@mui/material";
+import { Box, Grid2, Typography, Snackbar, Alert, Grow, IconButton } from "@mui/material";
 import styles from "./boxRegPage.module.css";
 import clsx from "clsx";
 import { Inputs } from "@/shared/ui/inputs/inputs";
@@ -9,6 +9,9 @@ import Link from "next/link";
 import { useState } from "react";
 import dayjs, { Dayjs } from "dayjs";
 import { useRouter } from 'next/navigation';
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+
+
 
 interface BoxRegPageProps {
   className?: string;
@@ -20,12 +23,16 @@ export function BoxRegPage({ className }: BoxRegPageProps) {
   const [mobilePhone, setMobilePhone] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConf, setPasswordConf] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConf, setShowPasswordConf] = useState(false);
   const [dateOfBirth, setDateOfBirth] = useState<Dayjs | null>(null);
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const router = useRouter();
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?=.{8,})/;
+  const today = dayjs();
 
 
 
@@ -60,13 +67,22 @@ export function BoxRegPage({ className }: BoxRegPageProps) {
       setError("Please write a password, which contains min 8 signs, 1 large and 1 small letters and a special sign");
       setOpenSnackbar(true);
       return
+    
+
+    } else if (passwordConf != password) { 
+      setError("Passwords are not equel");
+      setOpenSnackbar(true);
+      return
     }
     router.push(`/tickets`)
   }
 
+
+
+
   const validatePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
     const phone = e.target.value;
-    const phoneRegex = /^\+?\d*$/;
+    const phoneRegex = /^\+?\d{0,12}$/;
   
     if (phoneRegex.test(phone)) {
       setMobilePhone(phone); 
@@ -100,6 +116,21 @@ export function BoxRegPage({ className }: BoxRegPageProps) {
     setPassword(e.target.value); 
   };
 
+
+  const handleConfPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPasswordConf(e.target.value); 
+  };
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+
+  const toggleShowPasswordConf = () => {
+    setShowPasswordConf(!showPasswordConf);
+  };
+
+
   
 
   const handlePasswordBlur = () => {
@@ -128,10 +159,11 @@ export function BoxRegPage({ className }: BoxRegPageProps) {
         noValidate autoComplete="off"
 
         sx={{width: { xs: 300, sm: 330, md: 345, lg: 345, xl: 345 },
-          height: { xs: 420, sm: 420, md: 420, lg: 420, xl: 500 },
+          height: { xs: 490, xl: 560 },
           padding: { xs: 3, xl: 4 },
         }}
       >
+       
 
         <Grid2 
           container 
@@ -165,7 +197,8 @@ export function BoxRegPage({ className }: BoxRegPageProps) {
                 className={styles.datePickers}
                 value={dateOfBirth}
                 onChange={(date) => setDateOfBirth(date)}
-                minDate = {dayjs('01/01/1950')}
+                minDate = {dayjs('01/01/1930')}
+                maxDate={today}
                 sx = {{width: { xs: 137, sm: 150, md: 164, lg: 164, xl: 345}}}/>
             </Grid2>
 
@@ -194,11 +227,35 @@ export function BoxRegPage({ className }: BoxRegPageProps) {
 
             <Grid2>
               <Inputs 
+                type={showPassword ? 'text' : 'password'}
                 label="Password" 
                 className={styles.inputs}
                 value = {password}
                 onChange={handlePasswordChange}
                 onBlur={handlePasswordBlur}
+              
+                endAdornment={
+                  <IconButton onClick={toggleShowPassword} edge="end">
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                }
+              />
+            </Grid2>
+
+            <Grid2>
+              <Inputs 
+                type={showPasswordConf ? 'text' : 'password'}
+                label="Password" 
+                className={styles.inputs}
+                value = {passwordConf}
+                onChange={handleConfPassword}
+                onBlur={handlePasswordBlur}
+
+                endAdornment={
+                  <IconButton onClick={toggleShowPasswordConf} edge="end">
+                    {showPasswordConf ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                }
               />
             </Grid2>
 

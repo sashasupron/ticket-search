@@ -1,5 +1,5 @@
 "use client";
-import { Box, Grid2 } from "@mui/material";
+import { Box, Grid2, CircularProgress, Alert } from "@mui/material";
 import styles from './boxTicketPage.module.css';
 import clsx from "clsx";
 
@@ -23,10 +23,11 @@ interface Ticket {
 
 interface BoxTicketPageProps {
   className?: string;
-  ticket: Ticket; 
+  ticket?: Ticket; 
+  error?: string; 
+  loading?: boolean; 
 }
-
-const BoxTicketPage = ({ className, ticket }: BoxTicketPageProps) => {
+const BoxTicketPage = ({ className, ticket, error, loading }: BoxTicketPageProps) => {
     return (
         <Box 
             className={clsx(styles.ticketPageBox, className)}
@@ -35,14 +36,22 @@ const BoxTicketPage = ({ className, ticket }: BoxTicketPageProps) => {
               width: { xs: 350, sm: 600, md: 700, lg: 800, xl: 960 },
             }}
         >
-        <Grid2 container spacing={2}>
-          <Grid2>
-            <h2>Flight: {ticket.flight.number}</h2>
-            <p>Airline: {ticket.airline.name}</p>
-            <p>Departure: {ticket.departure.airport} at {ticket.departure.scheduled}</p>
-            <p>Arrival: {ticket.arrival.airport} at {ticket.arrival.scheduled}</p>
-          </Grid2>
-        </Grid2>
+          {loading ? (
+            <CircularProgress />
+          ) : error ? ( 
+            <Alert severity="error">{error}</Alert>
+          ) : ticket ? ( 
+            <Grid2 container spacing={2}>
+              <Grid2>
+                <h2>Flight: {ticket.flight.number}</h2>
+                <p>Airline: {ticket.airline.name}</p>
+                <p>Departure: {ticket.departure.airport} at {ticket.departure.scheduled}</p>
+                <p>Arrival: {ticket.arrival.airport} at {ticket.arrival.scheduled}</p>
+              </Grid2>
+            </Grid2>
+          ) : ( 
+            <Alert severity="info">No tickets available at the moment.</Alert>
+          )}
         </Box>
     );
 };

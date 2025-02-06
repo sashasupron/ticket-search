@@ -1,8 +1,9 @@
 "use client";
-import { Box, Grid2, SxProps, Snackbar, Alert, Grow } from "@mui/material";
+import { Box, Grid2, Snackbar, Alert, Grow } from "@mui/material";
 import { DatePickers } from "@/shared/ui/pickers/datePicker";
 import { Autocompletes } from "@/shared/ui/autocomplete/autocomplete";
 import { Buttons } from "@/shared/ui/buttons/buttons";
+import { Inputs } from "@/shared/ui/inputs/inputs";
 import styles from './boxMainPage.module.css';
 import { Selects } from "@/shared/ui/selects/selects"
 import clsx from "clsx";
@@ -12,7 +13,6 @@ import dayjs, { Dayjs } from "dayjs";
 
 interface BoxMainPageProps {
   className?: string;
-  sx?: SxProps;
   fromLocation?: string;
   toLocation?: string;
   classType?: string;
@@ -23,7 +23,6 @@ interface BoxMainPageProps {
 
 export function BoxMainPage({
   className,
-  sx,
   fromLocation = "", 
   toLocation = "",
   classType = "",
@@ -116,6 +115,9 @@ export function BoxMainPage({
   };
 
 
+  
+
+
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
@@ -126,7 +128,13 @@ export function BoxMainPage({
       component="form" 
       className={clsx(styles.mainPageBox, className)} 
       autoComplete="off"
-      sx={sx}
+      sx={{ width: { xs: 340, sm: 600, md: 700, lg: 800, xl: 800 },
+            height: { xs: 405, sm: 120, md: 115, lg: 120, xl: 110 },
+            padding: 3,
+            paddingRight: { xs: 1.5 },
+            paddingTop: { xs: 4, lg: 4.5 },
+            paddingBottom: {xl: 4}
+          }}
       onSubmit={(e) => e.preventDefault()}
     >
       <Grid2 container spacing={2} sx={{ marginTop: "-10px" }}>
@@ -171,6 +179,7 @@ export function BoxMainPage({
             value={currentDepartureDate}
             onChange={(date) => setDepartureDate(date)}
             minDate={today}
+            maxDate={dayjs('01/01/2045')}
             sx={{ width: { xs: 155, sm: 138, md: 172, lg: 207, xl: 207 }}}
           />
         </Grid2>
@@ -182,27 +191,22 @@ export function BoxMainPage({
             value={currentArrivalDate}
             onChange={(date) => setArrivalDate(date)}
             minDate={today}
+            maxDate={dayjs('01/01/2045')}
             sx={{ width: { xs: 155, sm: 138, md: 172, lg: 207, xl: 207 }}}
           />
         </Grid2>
 
 
-
         <Grid2>
-          <Selects
-            label="Amount"
+          <Inputs 
+            label="Passengers amount"
+            className={styles.inputs}
             value={currentPassengersAmount}
-            onChange={(newValue) => setPassengersAmount(newValue)} 
-            menuItems={[
-              { value: "1", label: "1" },
-              { value: "2", label: "2" },
-              { value: "3", label: "3" },
-              { value: "4", label: "4" },
-              { value: "5", label: "5" },
-            ]}
+            onChange={(e) => setPassengersAmount(e.target.value)} 
             sx={{width: { xs: 327, sm: 120, md: 150, lg: 180, xl: 180 }}}
           />
         </Grid2>
+
 
 
         <Grid2>

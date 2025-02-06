@@ -1,5 +1,5 @@
 "use client";
-import { Box, Grid2, Typography, Snackbar, Alert, Grow } from "@mui/material";
+import { Box, Grid2, Typography, Snackbar, Alert, Grow, IconButton } from "@mui/material";
 import styles from "./boxLoginPage.module.css";
 import clsx from "clsx";
 import { Inputs } from "@/shared/ui/inputs/inputs";
@@ -7,6 +7,7 @@ import { Buttons } from "@/shared/ui/buttons/buttons";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { useState } from "react";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 interface BoxLoginPageProps {
   className?: string;
@@ -15,6 +16,7 @@ interface BoxLoginPageProps {
 export function BoxLoginPage({ className }: BoxLoginPageProps) {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const router = useRouter();
@@ -29,6 +31,11 @@ export function BoxLoginPage({ className }: BoxLoginPageProps) {
     }
     router.push(`/tickets`)
   }
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
@@ -63,10 +70,17 @@ export function BoxLoginPage({ className }: BoxLoginPageProps) {
 
           <Grid2>
             <Inputs 
+              type={showPassword ? 'text' : 'password'}
               label="Password" 
               className={styles.inputs}
               value = {password}
               onChange={(e) => setPassword(e.target.value)}
+
+              endAdornment={
+                <IconButton onClick={toggleShowPassword} edge="end">
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              }
             />
           </Grid2>
 

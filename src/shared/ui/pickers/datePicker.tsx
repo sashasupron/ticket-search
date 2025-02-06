@@ -13,11 +13,12 @@ interface DatePickerProps {
   value: Dayjs | null; 
   onChange: (date: Dayjs | null) => void
   minDate : Dayjs; 
+  maxDate : Dayjs; 
 }
 
 
 
-export function DatePickers({ label, className, sx, value, onChange, minDate }: DatePickerProps) {
+export function DatePickers({ label, className, sx, value, onChange, minDate, maxDate }: DatePickerProps) {
 
 
   return (
@@ -28,6 +29,7 @@ export function DatePickers({ label, className, sx, value, onChange, minDate }: 
         value={value} 
         onChange={onChange}
         minDate={minDate}
+        maxDate={maxDate}
         format="DD/MM/YYYY"
         sx={sx}
       />

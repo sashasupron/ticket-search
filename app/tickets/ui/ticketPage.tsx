@@ -10,19 +10,20 @@ import { Box, Typography } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import dayjs, { Dayjs } from "dayjs";
 
-
 const TicketPage = () => {
   const searchParams = useSearchParams();
 
   const fromLocation = searchParams?.get("from") || "";
   const toLocation = searchParams?.get("to") || "";
   const classType = searchParams?.get("class") || "";
-  const departureDateString = searchParams?.get("departure") || null;;
-  const arrivalDateString = searchParams?.get("arrival") || null;;
+  const departureDateString = searchParams?.get("departure") || null;
+  const arrivalDateString = searchParams?.get("arrival") || null;
   const passengersAmount = searchParams?.get("passengers") || "";
-  
+
   const departureDate: Dayjs | null = departureDateString ? dayjs(departureDateString) : null;
   const arrivalDate: Dayjs | null = arrivalDateString ? dayjs(arrivalDateString) : null;
+
+  const { tickets, isLoading, error } = useTicketData(fromLocation, toLocation, departureDateString);
 
   useEffect(() => {
     const scrollTimeout = setTimeout(() => {
@@ -35,60 +36,55 @@ const TicketPage = () => {
     return () => clearTimeout(scrollTimeout);
   }, []);
 
-
-  const { tickets, isLoading } = useTicketData(fromLocation, toLocation, departureDateString);
-
-  if (isLoading) {
-    return <div> Loading... </div>;
-  }
-
-
   return (
-    <BackgroundImage image={image} altImage="Ticiket page background">
-    <div className={styles.ticketPage}>
-      <BoxMainPage 
-        className={styles.topCenter}
+    <BackgroundImage image={image} altImage="Ticket page background">
+      <div className={styles.ticketPage}>
+        <BoxMainPage
+          className={styles.topCenter}
+          fromLocation={fromLocation}
+          toLocation={toLocation}
+          classType={classType}
+          departureDate={departureDate}
+          arrivalDate={arrivalDate}
+          passengersAmount={passengersAmount}
+        />
 
-        fromLocation={fromLocation}
-        toLocation={toLocation}
-        classType={classType}
-        departureDate={departureDate}
-        arrivalDate={arrivalDate}
-        passengersAmount={passengersAmount}
-
-        
-
-        sx={{ width: { xs: 300, sm: 600, md: 700, lg: 800, xl: 800 },
-          height: { xs: 420, sm: 120, md: 130, lg: 135, xl: 110 },
-          padding: { xs: 3 },
-          paddingRight: { xs: 1.5 },
-          paddingTop: { xs: 4, lg: 4.5 },
-          paddingBottom: { xs: 3, sm: 2.5, md: 1.5, lg: 3, xl: 4,}
-        }}/>
-
-      <Typography 
-        variant = "h1"
-        className={styles.ticketHeading}
-
-        sx={{ marginTop: { xs: "30%", sm: "15%", md: "20%", lg: "3%", xl: "10%" },
+        <Typography
+          variant="h1"
+          className={styles.ticketHeading}
+          sx={{
+            marginTop: { xs: "15%", sm: "15%", md: "20%", lg: "3%", xl: "10%" },
             fontSize: { xs: 30, sm: 50, md: 50, lg: 50, xl: 80 },
-        }}>
-      
-        Available Tickets
-       </Typography>
-
-
-
-       <Box
-          className={styles.ticketsContainer}
-          sx={{ width: { xs: "60%", lg: "50%", xl: "40%" } }}
+          }}
         >
-          {tickets.map((ticket) => (
-            <BoxTicketPage key={ticket.flight.number} ticket={ticket} />
-          ))}
-        </Box>
+          Available flights
+        </Typography>
 
-    </div>
+        <Box
+          className={styles.ticketsContainer}
+          sx={{
+            width: { xs: "60%", lg: "50%", xl: "40%" },
+            backgroundColor: "#fff",
+            borderRadius: 2,
+            boxShadow: 2,
+            textAlign: "center",
+          }}
+        >
+          {isLoading ? (
+            <Typography variant="h5" sx={{ color: "white", paddingTop: 3}}>Loading...</Typography>
+          ) : error ? (
+            <Typography variant="h5" sx={{ color: "white", paddingTop: 3 }}>
+              {error.includes("403") ? "Server Error" : error}
+            </Typography>
+          ) : tickets.length > 0 ? (
+            tickets.map((ticket) => (
+              <BoxTicketPage key={ticket.flight.number} ticket={ticket} />
+            ))
+          ) : (
+            <Typography variant="h6">No tickets available for the selected criteria.</Typography>
+          )}
+        </Box>
+      </div>
     </BackgroundImage>
   );
 };
