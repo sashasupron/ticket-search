@@ -1,5 +1,5 @@
 "use client";
-import image from "@/shared/assets/images/sky.jpg";
+import image from "@/shared/assets/images/image-2.jpg";
 import { BackgroundImage } from "@/shared/ui/backgroundImage";
 import { BoxContactPage } from "@/shared/widgets/box/contact/boxContactPage";
 import styles from "./contact.module.css";
