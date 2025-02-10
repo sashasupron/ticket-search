@@ -1,0 +1,16 @@
+.mainPageBox {
+    position: relative; 
+    border-radius: 8px; 
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+
+.mainPageBox .searchButton {
+    height: 3.5rem; 
+}
+
+
+    
+    
+    

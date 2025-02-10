@@ -1,0 +1,1 @@
+export { Inputs } from "@/shared/ui/inputs/inputs"
