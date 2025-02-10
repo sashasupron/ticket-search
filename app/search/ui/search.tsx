@@ -1,4 +1,4 @@
-import image from "@/shared/assets/images/background2-1-photoaidcom-darken.png";
+import image from "@/shared/assets/images/gfgg.png";
 import { BackgroundImage } from "@/shared/ui/backgroundImage";
 import { BoxMainPage } from "@/shared/widgets/box/searchPage/ui/boxMainPage";
 import styles from "./search.module.css";

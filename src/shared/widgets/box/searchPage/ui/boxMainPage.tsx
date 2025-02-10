@@ -132,6 +132,7 @@ export function BoxMainPage({
             height: { xs: 405, sm: 120, md: 115, lg: 120, xl: 110 },
             padding: 3,
             paddingRight: { xs: 1.5 },
+            marginTop: { xs: 4, sm: 7, md: 12, lg: 4.5 },
             paddingTop: { xs: 4, lg: 4.5 },
             paddingBottom: {xl: 4}
           }}
