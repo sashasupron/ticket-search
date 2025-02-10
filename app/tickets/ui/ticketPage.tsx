@@ -1,6 +1,7 @@
 "use client";
+
 import BoxTicketPage from "@/shared/widgets/box/ticketPage/ui/boxTicketPage";
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { useTicketData } from "../model/useTicketData";
 import styles from "./ticketPage.module.css";
 import image from "@/shared/assets/images/ppp.png";
@@ -10,7 +11,7 @@ import { Box, Typography } from "@mui/material";
 import { useSearchParams } from "next/navigation";
 import dayjs, { Dayjs } from "dayjs";
 
-const TicketPage = () => {
+const TicketPageContent = () => {
   const searchParams = useSearchParams();
 
   const fromLocation = searchParams?.get("from") || "";
@@ -71,7 +72,7 @@ const TicketPage = () => {
           }}
         >
           {isLoading ? (
-            <Typography variant="h5" sx={{ color: "white", paddingTop: 3}}>Loading...</Typography>
+            <Typography variant="h5" sx={{ color: "white", paddingTop: 3 }}>Loading...</Typography>
           ) : error ? (
             <Typography variant="h5" sx={{ color: "white", paddingTop: 3 }}>
               {error.includes("403") ? "Server Error" : error}
@@ -86,6 +87,14 @@ const TicketPage = () => {
         </Box>
       </div>
     </BackgroundImage>
+  );
+};
+
+const TicketPage = () => {
+  return (
+    <Suspense fallback={<div>Loading search parameters...</div>}>
+      <TicketPageContent />
+    </Suspense>
   );
 };
 
