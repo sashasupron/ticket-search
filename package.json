@@ -34,7 +34,7 @@
     "sharp": "^0.33.5"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "20.17.17",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
@@ -42,6 +42,6 @@
     "postcss": "^8",
     "steiger": "^0.4.0",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "5.7.3"
   }
 }
