@@ -1,5 +1,0 @@
-[
-  { "id": 1, "name": "Ticket 1", "price": 100 },
-  { "id": 2, "name": "Ticket 2", "price": 150 },
-  { "id": 3, "name": "Ticket 3", "price": 200 }
-]

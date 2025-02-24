@@ -1,0 +1,18 @@
+.ticketHeading {
+    padding-top: 8px; 
+    z-index: 1;
+    color: white;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+.mainPageBox {
+    position: relative; 
+    border-radius: 8px; 
+    background-color: rgba(255, 255, 255, 0.766);
+}
+
+.passengerList {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 16px;
+    border-radius: 8px;
+}

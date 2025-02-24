@@ -16,8 +16,13 @@
     "@mui/material": "^6.1.2",
     "@mui/x-date-pickers": "^7.19.0",
     "@reduxjs/toolkit": "^2.3.0",
+<<<<<<< HEAD
+    "@tanstack/react-query": "^5.66.9",
+    "axios": "^1.7.9",
+=======
     "axios": "^1.7.7",
     "body-parser": "^1.20.3",
+>>>>>>> main
     "clsx": "^2.1.1",
     "cors": "^2.8.5",
     "dayjs": "^1.11.13",
@@ -29,9 +34,16 @@
     "react-dom": "^18.3.1",
     "react-error-boundary": "^4.1.2",
     "react-hook-form": "^7.53.2",
+    "react-query": "^3.39.3",
     "react-redux": "^9.1.2",
     "redux-persist": "^6.0.0",
+<<<<<<< HEAD
+    "sweetalert2": "^11.17.2",
+    "sweetalert2-react-content": "^5.1.0",
+    "tailwindcss": "^3.4.1"
+=======
     "sharp": "^0.33.5"
+>>>>>>> main
   },
   "devDependencies": {
     "@types/node": "20.17.17",
@@ -41,7 +53,11 @@
     "eslint-config-next": "14.2.14",
     "postcss": "^8",
     "steiger": "^0.4.0",
+<<<<<<< HEAD
+    "typescript": "^5"
+=======
     "tailwindcss": "^3.4.1",
     "typescript": "5.7.3"
+>>>>>>> main
   }
 }

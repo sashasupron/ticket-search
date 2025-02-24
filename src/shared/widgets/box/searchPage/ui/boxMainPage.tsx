@@ -1,233 +1,243 @@
 "use client";
-import { Box, Grid2, Snackbar, Alert, Grow } from "@mui/material";
-import { DatePickers } from "@/shared/ui/pickers/datePicker";
+import { AirportResponse, SeatEnum } from "@/shared/types";
 import { Autocompletes } from "@/shared/ui/autocomplete/autocomplete";
 import { Buttons } from "@/shared/ui/buttons/buttons";
-import { Inputs } from "@/shared/ui/inputs/inputs";
-import styles from './boxMainPage.module.css';
-import { Selects } from "@/shared/ui/selects/selects"
+import { DatePickers } from "@/shared/ui/pickers/datePicker";
+import {
+  Alert,
+  Box,
+  FormControl,
+  Grid2,
+  Grow,
+  InputLabel,
+  MenuItem,
+  Select,
+  Snackbar,
+  SxProps,
+} from "@mui/material";
 import clsx from "clsx";
-import { useRouter } from 'next/navigation';
-import React, { useState } from "react";
-import dayjs, { Dayjs } from "dayjs";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import styles from "./boxMainPage.module.css";
 
 interface BoxMainPageProps {
   className?: string;
-  fromLocation?: string;
-  toLocation?: string;
-  classType?: string;
-  departureDate?: Dayjs | null;
-  arrivalDate?: Dayjs | null;
-  passengersAmount?: string;
+  sx?: SxProps;
 }
 
-export function BoxMainPage({
-  className,
-  fromLocation = "", 
-  toLocation = "",
-  classType = "",
-  departureDate = null,
-  arrivalDate = null,
-  passengersAmount = "",
-}: BoxMainPageProps) {
+export function BoxMainPage({ className, sx }: BoxMainPageProps) {
   const router = useRouter();
-  const today = dayjs();
-  const [currentFromLocation, setFromLocation] = useState(fromLocation);
-  const [currentToLocation, setToLocation] = useState(toLocation);
-  const [currentClassType, setClassType] = useState(classType);
-
-  const [currentDepartureDate, setDepartureDate] = useState<Dayjs | null>(
-    departureDate ? dayjs(departureDate) : null
-  );
-
-  const [currentArrivalDate, setArrivalDate] = useState<Dayjs | null>(
-    arrivalDate ? dayjs(arrivalDate) : null
-  );
-
-  const [currentPassengersAmount, setPassengersAmount] = useState(
-    passengersAmount
-  );
-  
-  const [error, setError] = useState('');
+  const [fromLocation, setFromLocation] = useState<AirportResponse | null>();
+  const [toLocation, setToLocation] = useState<AirportResponse | null>();
+  const [classType, setClassType] = useState<SeatEnum>(SeatEnum.ECONOMY);
+  const [pasAmount, setPasAmount] = useState<number | undefined>();
+  const [error, setError] = useState<string | undefined>();
+  const [dateIn, setDateIn] = useState<string | null>(null);
+  const [dateOut, setDateOut] = useState<string | null>(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
+  const handleFromLocationChange = (newValue: AirportResponse | null) => {
+    setFromLocation(newValue);
+    setError(undefined);
+  };
 
+  const handleToLocationChange = (newValue: AirportResponse | null) => {
+    setToLocation(newValue);
+    setError(undefined);
+  };
 
-  const handleSearch = () => {
-    if (!currentFromLocation) {
-      setError("Please select an departure location");
+  const handleClassChange = (newValue: string) => {
+    setError(undefined);
+    if (newValue === "") {
+      setClassType(undefined);
+      return;
+    } else if (newValue === "Economy") {
+      setClassType(SeatEnum.ECONOMY);
+      return;
+    } else if (newValue === SeatEnum.PREMIUM_ECONOMY) {
+      setClassType(SeatEnum.PREMIUM_ECONOMY);
+      return;
+    } else if (newValue === SeatEnum.BISNESS) {
+      setClassType(SeatEnum.BISNESS);
+      return;
+    } else if (newValue === SeatEnum.FIRST) {
+      setClassType(SeatEnum.FIRST);
+      return;
+    }
+  };
+
+  const handleAmountChange = (value: number) => {
+    setPasAmount(value || undefined);
+    setError("");
+  };
+
+  const handleSubmit = () => {
+    if (!fromLocation) {
+      setError("Please select a from.");
       setOpenSnackbar(true);
-      return
-
-    } else if (!currentToLocation) {
-      setError("Please select a destination location");
-      setOpenSnackbar(true);
-      return
-
-    } else if (!currentClassType) {
+    } else if (!classType) {
       setError("Please select a class.");
       setOpenSnackbar(true);
-      return
-
-    } else if (!currentArrivalDate) {
-      setError("Please select an arrival date");
+    } else if (!pasAmount) {
+      setError("Please select a passengers amount.");
       setOpenSnackbar(true);
-      return
-    
-    } else if (!currentDepartureDate) {
-      setError("Please select a departure date");
-      setOpenSnackbar(true);
-      return
-
-    } else if (!currentPassengersAmount) {
-      setError("Please select a passengers amount");
-      setOpenSnackbar(true);
-      return
-
-    } else if (!currentPassengersAmount) {
-      setError("Please select a passengers amount");
-      setOpenSnackbar(true);
-      return
-    } 
-
-    router.push(`/tickets?from=${currentFromLocation}&to=${currentToLocation}&class=${currentClassType}&departure=${currentDepartureDate}&arrival=${currentArrivalDate}&passengers=${currentPassengersAmount}`);
-  };
-
-
-
-  const handleFromChange = (newValue: string | null) => {
-    if (newValue === currentToLocation) {
-      setError("Departure and arrival locations cannot be the same.");
     } else {
-      setFromLocation(newValue || "");
-      setError(""); 
+      const queryBody = {
+        fromLocation: fromLocation.airportIata,
+        toLocation: toLocation?.airportIata,
+        classType: classType,
+        pasAmount: pasAmount,
+        dateIn: dateIn,
+        dateOut: dateOut,
+      };
+      const addQueryParam = () => {
+        const params = new URLSearchParams(
+          Array.from(Object.entries(queryBody))
+        );
+        router.push(`/tickets?${params.toString()}`);
+      };
+      addQueryParam();
     }
   };
-
-
-  const handleToChange = (newValue: string | null) => {
-    if (newValue === currentFromLocation) {
-      setError("Departure and arrival locations cannot be the same.");
-    } else {
-      setToLocation(newValue || "");
-      setError(""); 
-    }
-  };
-
-
-  
-
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
 
-
   return (
     <Box
-      component="form" 
-      className={clsx(styles.mainPageBox, className)} 
+      component="form"
+      className={clsx(styles.mainPageBox, className)}
       autoComplete="off"
-      sx={{ width: { xs: 340, sm: 600, md: 700, lg: 800, xl: 800 },
-            height: { xs: 405, sm: 120, md: 115, lg: 120, xl: 110 },
-            padding: 3,
-            paddingRight: { xs: 1.5 },
-            marginTop: { xs: 4, sm: 7, md: 12, lg: 4.5 },
-            paddingTop: { xs: 4, lg: 4.5 },
-            paddingBottom: {xl: 4}
-          }}
+      sx={sx}
       onSubmit={(e) => e.preventDefault()}
     >
       <Grid2 container spacing={2} sx={{ marginTop: "-10px" }}>
         <Grid2>
-          <Autocompletes 
-            label="Where from?" 
-            className={styles.inputs}
-            value={currentFromLocation}
-            onChange={handleFromChange}
-          />
+          <FormControl
+            fullWidth
+            variant="filled"
+            error={!fromLocation && !!error}
+          >
+            <Autocompletes
+              label="Where from?"
+              className={styles.inputs}
+              onChange={handleFromLocationChange}
+            />
+          </FormControl>
         </Grid2>
 
         <Grid2>
-          <Autocompletes 
-            label="Where to?" 
-            className={styles.inputs} 
-            value={currentToLocation}
-            onChange={handleToChange}
-          />
+          <FormControl
+            fullWidth
+            variant="filled"
+            error={!toLocation && !!error}
+          >
+            <Autocompletes
+              label="Where to?"
+              className={styles.inputs}
+              onChange={(e) => handleToLocationChange(e)}
+            />
+          </FormControl>
         </Grid2>
 
-
         <Grid2>
-          <Selects
-            label="Class"
-            value={currentClassType} 
-            onChange={(newValue) => setClassType(newValue)} 
-            menuItems={[
-              { value: "Econom", label: "Econom" },
-              { value: "Business", label: "Business" },
-              { value: "FirstClass", label: "First Class" },
-            ]} 
-            sx = {{ width: { xs: 327, sm: 120, md: 150, lg: 180, xl: 180 }, }}
-          />
+          <FormControl fullWidth variant="filled" error={!classType && !!error}>
+            <InputLabel id="class-select-label">Class</InputLabel>
+            <Select
+              labelId="class-select-label"
+              id="classType"
+              defaultValue={`${SeatEnum.ECONOMY}`}
+              onChange={(e) => handleClassChange(e.target.value)}
+              sx={{
+                width: { xs: 290, sm: 120, md: 150, lg: 180, xl: 180 },
+                background: "white",
+                borderRadius: 1,
+                "&:hover": { backgroundColor: "white" },
+                "&.Mui-focused": { backgroundColor: "white" },
+              }}
+            >
+              {[
+                SeatEnum.ECONOMY,
+                SeatEnum.PREMIUM_ECONOMY,
+                SeatEnum.BISNESS,
+                SeatEnum.FIRST,
+              ].map((x) => (
+                <MenuItem key={`${x}`} value={`${x}`}>
+                  {`${x}`}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Grid2>
 
-
         <Grid2>
-          <DatePickers 
-            label="Departure date" 
+          <DatePickers
+            label="Departure date"
+            onChange={(e) => setDateIn(e)}
             className={styles.datePicker}
-            value={currentDepartureDate}
-            onChange={(date) => setDepartureDate(date)}
-            minDate={today}
-            maxDate={dayjs('01/01/2045')}
-            sx={{ width: { xs: 155, sm: 138, md: 172, lg: 207, xl: 207 }}}
+            sx={{ width: { xs: 137, sm: 138, md: 172, lg: 207, xl: 207 } }}
           />
         </Grid2>
 
         <Grid2>
-          <DatePickers 
-            label="Arrival date" 
+          <DatePickers
+            label="Arrival date"
+            onChange={(e) => setDateOut(e)}
             className={styles.datePicker}
-            value={currentArrivalDate}
-            onChange={(date) => setArrivalDate(date)}
-            minDate={today}
-            maxDate={dayjs('01/01/2045')}
-            sx={{ width: { xs: 155, sm: 138, md: 172, lg: 207, xl: 207 }}}
+            sx={{ width: { xs: 137, sm: 138, md: 172, lg: 207, xl: 207 } }}
           />
         </Grid2>
 
-
         <Grid2>
-          <Inputs 
-            label="Passengers amount"
-            className={styles.inputs}
-            value={currentPassengersAmount}
-            onChange={(e) => setPassengersAmount(e.target.value)} 
-            sx={{width: { xs: 327, sm: 120, md: 150, lg: 180, xl: 180 }}}
-          />
+          <FormControl fullWidth variant="filled" error={!pasAmount && !!error}>
+            <InputLabel id="amount-select-label">Amount</InputLabel>
+            <Select
+              labelId="amount-select-label"
+              id="amount"
+              onChange={(e, value) =>
+                handleAmountChange(e.target.value as number)
+              }
+              sx={{
+                width: { xs: 290, sm: 120, md: 150, lg: 180, xl: 180 },
+                background: "white",
+                borderRadius: 1,
+                "&:hover": { backgroundColor: "white" },
+                "&.Mui-focused": { backgroundColor: "white" },
+              }}
+            >
+              {[1, 2, 3, 4, 5, 6].map((item) => (
+                <MenuItem key={item} value={item}>
+                  {item}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
         </Grid2>
 
-
-
         <Grid2>
-          <Buttons 
-            label="Search" 
-            onClick={handleSearch}
-            className={styles.searchButton} 
-            sx={{ width: { xs: 327, sm: 150, md: 150, lg: 150, xl: 150 } }}
+          <Buttons
+            type="submit"
+            onClick={handleSubmit}
+            label="Search"
+            className={styles.searchButton}
+            sx={{ width: { xs: 290, sm: 150, md: 150, lg: 150, xl: 150 } }}
           />
         </Grid2>
       </Grid2>
 
-      <Snackbar 
-        open={openSnackbar} 
-        autoHideDuration={3000} 
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
         onClose={handleCloseSnackbar}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        TransitionComponent={Grow} 
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        TransitionComponent={Grow}
       >
-        <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
           {error}
         </Alert>
       </Snackbar>

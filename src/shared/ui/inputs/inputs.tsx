@@ -1,38 +1,40 @@
-import { TextField, SxProps, InputAdornment } from "@mui/material";
+import { SxProps, TextField } from "@mui/material";
 import clsx from "clsx";
-import styles from './inputs.module.css';
-import { ReactNode } from "react";
+import { HTMLInputTypeAttribute } from "react";
+import styles from "./inputs.module.css";
 
 interface InputsProps {
   label: string;
   className?: string;
   sx?: SxProps;
-  value: string;
-  type?: string;
-  endAdornment?: ReactNode;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  value?: string;
+  type?: HTMLInputTypeAttribute;
+  onChange?: (state: string) => void;
+  required?: boolean;
 }
 
-export function Inputs({ label, className, sx, value, type, endAdornment, onChange, onBlur}: InputsProps) {
+export function Inputs({
+  label,
+  className,
+  sx,
+  type = "text",
+
+  required,
+  value,
+  onChange = () => {},
+}: InputsProps) {
   return (
     <div>
       <TextField
         id="departurePlace"
         label={label}
         variant="filled"
-        value={value}
-        type={type} 
-        onChange={onChange}
-        onBlur={onBlur}
+        required={required}
+        value={value || ""}
+        type={type}
+        onChange={(e) => onChange(e.target.value)}
         className={clsx(styles.inputs, className)}
         sx={sx}
-        InputProps={{
-          endAdornment: endAdornment && (
-            <InputAdornment position="end">{endAdornment}</InputAdornment>
-          ),
-        }}
-        
       />
     </div>
   );

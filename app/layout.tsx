@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@/app/providers";
+import { TanstackQueryClientProvider, ThemeProvider } from "@/app/providers";
 import "@/app/styles/globals.css";
 import "@/app/styles/index.css";
 import { NavBar } from "@/shared/widgets/header/ui/navigation";
@@ -13,8 +13,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ThemeProvider>
-          <NavBar />
-          {children}
+          <TanstackQueryClientProvider>
+            <NavBar />
+            {children}
+          </TanstackQueryClientProvider>
         </ThemeProvider>
       </body>
     </html>
