@@ -9,5 +9,20 @@
 
 
 .link {
+    color: white; 
+    text-decoration: none; 
+    transition: color 0.3s ease; 
+}
+
+.link:visited {
     color: white;
 }
+
+.link:focus, .link:active {
+    color: white; 
+}
+
+.link:hover {
+    color: #b5b5b3; 
+}
+  

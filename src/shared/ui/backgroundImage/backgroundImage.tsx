@@ -11,7 +11,7 @@ export interface BackgroundImageProps {
 
 export const BackgroundImage: FC<BackgroundImageProps> = ({
   image,
-  altImage,
+  altImage = "",
   children,
 }) => {
   return (

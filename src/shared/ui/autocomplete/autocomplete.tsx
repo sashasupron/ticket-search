@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import clsx from "clsx";
 import styles from "./autocomplete.module.css";
 
+
 interface AutocompleteProps {
   label: string;
   className?: string;
@@ -40,21 +41,13 @@ export function Autocompletes({
         renderInput={(params) => (
           <TextField
             {...params}
-            id="departurePlace"
             label={label}
             variant="filled"
             className={clsx(styles.autocompletes, className)}
-            sx={{
-              width: {
-                xs: 290,
-                sm: 220,
-                md: 255,
-                lg: 290,
-                xl: 290,
-              },
-            }}
+            sx={{ width: { xs: 327, sm: 220, md: 255, lg: 290, xl: 290,},}}
           />
         )}
+        
         renderOption={(props, option) => (
           <li {...props} key={`${option.airportId}`}>
             {`${option.airportCity}, ${option.airportCountry.fullCountryName}`}
