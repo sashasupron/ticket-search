@@ -8,7 +8,6 @@ const Search = () => {
   return (
     <BackgroundImage image={image} altImage="Main page background">
       <div className={styles.searchPage}>
-<<<<<<< HEAD
         <BoxMainPage
           sx={{
             width: {
@@ -62,13 +61,6 @@ const Search = () => {
             },
           }}
         >
-=======
-        <BoxMainPage />
-        <Typography 
-          className = {styles.searchPageText}
-          sx = {{ fontSize: { xs: 20, sm: 21, md: 28, lg: 33, xl: 43 }}}> 
-          
->>>>>>> main
           Explore your adventures! Book flights now!
         </Typography>
       </div>
