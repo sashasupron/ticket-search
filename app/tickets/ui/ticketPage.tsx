@@ -1,45 +1,18 @@
 "use client";
 
-<<<<<<< HEAD
 import { bookingResources } from "@/shared/api";
 import image from "@/shared/assets/images/image.jpg";
 import { AirportResponse, SeatEnum } from "@/shared/types";
-=======
-import BoxTicketPage from "@/shared/widgets/box/ticketPage/ui/boxTicketPage";
-import { useEffect, Suspense } from "react";
-import { useTicketData } from "../model/useTicketData";
-import styles from "./ticketPage.module.css";
-import image from "@/shared/assets/images/ppp.png";
->>>>>>> main
 import { BackgroundImage } from "@/shared/ui/backgroundImage";
 import { BoxMainPage } from "@/shared/widgets/box/searchPage/ui/boxMainPage";
 import BoxTicketPage from "@/shared/widgets/box/ticketPage/ui/boxTicketPage";
 import { Box, Typography } from "@mui/material";
-<<<<<<< HEAD
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import styles from "./ticketPage.module.css";
-=======
-import { useSearchParams } from "next/navigation";
-import dayjs, { Dayjs } from "dayjs";
 
 const TicketPageContent = () => {
-  const searchParams = useSearchParams();
-
-  const fromLocation = searchParams?.get("from") || "";
-  const toLocation = searchParams?.get("to") || "";
-  const classType = searchParams?.get("class") || "";
-  const departureDateString = searchParams?.get("departure") || null;
-  const arrivalDateString = searchParams?.get("arrival") || null;
-  const passengersAmount = searchParams?.get("passengers") || "";
-
-  const departureDate: Dayjs | null = departureDateString ? dayjs(departureDateString) : null;
-  const arrivalDate: Dayjs | null = arrivalDateString ? dayjs(arrivalDateString) : null;
-
-  const { tickets, isLoading, error } = useTicketData(fromLocation, toLocation, departureDateString);
->>>>>>> main
-
   useEffect(() => {
     const scrollTimeout = setTimeout(() => {
       window.scrollTo({
@@ -52,7 +25,6 @@ const TicketPageContent = () => {
   }, []);
   const searchParams = useSearchParams();
 
-<<<<<<< HEAD
   const airportsQuery = useQuery({
     queryKey: ["airports"],
     queryFn: () => bookingResources.getAirports({}),
@@ -248,56 +220,6 @@ const TicketPageContent = () => {
             </Box>
           </>
         )}
-=======
-  return (
-    <BackgroundImage image={image} altImage="Ticket page background">
-      <div className={styles.ticketPage}>
-        <BoxMainPage
-          className={styles.topCenter}
-          fromLocation={fromLocation}
-          toLocation={toLocation}
-          classType={classType}
-          departureDate={departureDate}
-          arrivalDate={arrivalDate}
-          passengersAmount={passengersAmount}
-        />
-
-        <Typography
-          variant="h1"
-          className={styles.ticketHeading}
-          sx={{
-            marginTop: { xs: "15%", sm: "15%", md: "20%", lg: "3%", xl: "10%" },
-            fontSize: { xs: 30, sm: 50, md: 50, lg: 50, xl: 80 },
-          }}
-        >
-          Available flights
-        </Typography>
-
-        <Box
-          className={styles.ticketsContainer}
-          sx={{
-            width: { xs: "60%", lg: "50%", xl: "40%" },
-            backgroundColor: "#fff",
-            borderRadius: 2,
-            boxShadow: 2,
-            textAlign: "center",
-          }}
-        >
-          {isLoading ? (
-            <Typography variant="h5" sx={{ color: "white", paddingTop: 3 }}>Loading...</Typography>
-          ) : error ? (
-            <Typography variant="h5" sx={{ color: "white", paddingTop: 3 }}>
-              {error.includes("403") ? "Server Error" : error}
-            </Typography>
-          ) : tickets.length > 0 ? (
-            tickets.map((ticket) => (
-              <BoxTicketPage key={ticket.flight.number} ticket={ticket} />
-            ))
-          ) : (
-            <Typography variant="h6">No tickets available for the selected criteria.</Typography>
-          )}
-        </Box>
->>>>>>> main
       </div>
     </BackgroundImage>
   );
